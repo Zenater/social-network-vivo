@@ -1,25 +1,15 @@
 import React from 'react';
 import s from './My posts.module.css';
 import {Post} from "../Post/Post";
+import {PostPropsType} from "../../../../index";
 
-type ObfPropsType = {
-    id: number
-    message: string
-    likes: number
-}
 
-export type PostPropsType = {
-    posts: ObfPropsType[]
-}
 
-export const MyPosts = ( ) => {
 
-    const posts = [
-        {id: 1, message: "hi, how are you?", likes: 12},
-        {id: 2, message: "It my fist posts", likes: 11}
-    ]
+export const MyPosts = (props: PostPropsType ) => {
 
-   const postsElement = posts.map(p=><Post message={p.message} likes={p.likes}/>)
+
+   const postsElement = props.posts.map(p=><Post message={p.message} likes={p.likes}/>)
 
     return (
         <div className={s.postsBlock}>
@@ -31,7 +21,6 @@ export const MyPosts = ( ) => {
              <div>
                  <button>Add posts</button>
              </div>
-
             </div>
             <div className={s.c}>
                 {postsElement}
