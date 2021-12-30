@@ -3,38 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {state} from "./redux/state";
-
-export type ObjPropsType = {
-    id: number
-    message: string
-    likes: number
-}
-
-export type AppPropsType = {
-    posts: ObjPropsType[]
-}
-
-export type PostPropsType = {
-    posts: ObjPropsType[]
-}
-
-export type DialogItemPropsType = {
-    name: string
-    id: number
-}
+import {addPost, state} from "./redux/state";
+import {RootStateType} from "./redux/state";
 
 
-export type MessageS = {
-    id: number
-    message: string
-}
 
 /*posts={posts} dialogs={dialogs} messages={messages}*/
 
 ReactDOM.render(
     <React.StrictMode>
-        <App state={state} />
+<App profilePage={state.profilePage} dialogsPage={state.dialogsPage} addPostCallback={addPost}/>
     </React.StrictMode>,
     document.getElementById('root')
 );
