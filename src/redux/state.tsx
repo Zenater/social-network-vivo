@@ -1,5 +1,10 @@
 import React from 'react';
-import {ProfilePageType} from "../components/Profile/Profile";
+
+
+let onChange = ()=> {
+    console.log('State changed')
+}
+
 
 export type MessageType = {
     id: number
@@ -15,6 +20,10 @@ export type PostType = {
     message: string
     likes: number
 }
+export type ProfilePageType = {
+    post: Array<PostType>
+    messageForNewPost: string
+}
 
 export type DialogsPageType = {
     dialogs: DialogsType[]
@@ -26,12 +35,14 @@ export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar?: SidebarType
-    addPostCallback: (postMessage:string)=>void
 }
 
-export const state = {
+
+
+export const state: RootStateType = {
     profilePage: {
-        posts: [
+        messageForNewPost: "",
+        post: [
             {id: 1, message: "hi, how are you?", likes: 12},
             {id: 2, message: "It my fist posts", likes: 11},
             {id: 3, message: "It my dog", likes: 5},
@@ -57,7 +68,20 @@ export const state = {
     sidebar: {}
 }
 
-export const addPost =(postMessage:string) => {
-    let newPost:PostType ={id: new Date().getTime(), message:postMessage , likes: 0};
-    state.profilePage.posts.push(newPost)
+export type addPostPropsType = {
+    addPost: (postText: string) => void
+}
+
+export const addPost =(postText:string) => {
+    let newPost:PostType ={id: new Date().getTime(), message:postText , likes: 0};
+    state.profilePage.post.push(newPost)
+    state.profilePage.messageForNewPost= ""
+    onChange();
+}
+export const changeNewText= (newText: string) => {
+    state.profilePage.messageForNewPost = newText;
+    onChange();
+}
+export const subscribe = (callback:()=>void) => {
+    onChange = callback
 }

@@ -1,20 +1,28 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './My posts.module.css';
-import {Post} from "../Post/Post";
-import {ProfilePageType} from "../../Profile";
+import {Post, PostType} from "../Post/Post";
 
+type MyPostsPropsType = {
+    post: Array<PostType>
+    addPostCallBack: (postText:string)=>void
+    message:string
+    changeTextCallback: (newText:string)=>void
+}
 
-export const MyPosts = (props: ProfilePageType) => {
+export const MyPosts = (props: MyPostsPropsType) => {
 
-
-    const postsElement = props.posts.map(p => <Post message={p.message} likes={p.likes}/>)
-
-    let newPostElement = React.createRef<HTMLTextAreaElement>();
+    let postsElement = props.post.map(p => <Post message={p.message} likes={p.likes}/>)
+    // let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const addNewUser = () => {
-        if(newPostElement.current) {
-            props.addPostCallBack(newPostElement.current.value)
-        }
+        // if(newPostElement.current) {
+        //     props.addPostCallBack(newPostElement.current.value)
+        props.addPostCallBack(props.message);
+        props.changeTextCallback("")
+    }
+
+    const newTextChangeHandler=(e: ChangeEvent<HTMLTextAreaElement> )=>{
+        props.changeTextCallback(e.currentTarget.value)
     }
 
     return (
@@ -22,13 +30,15 @@ export const MyPosts = (props: ProfilePageType) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                <textarea
+                    value={props.message}
+                    onChange={newTextChangeHandler}/>
                 </div>
                 <div>
                     <button onClick={addNewUser}>Add posts</button>
                 </div>
             </div>
-            <div className={s.c}>
+            <div className={s.posts}>
                 {postsElement}
             </div>
         </div>
