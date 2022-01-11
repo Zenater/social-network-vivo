@@ -2,7 +2,7 @@ import React from 'react';
 import {MyPosts,} from "./My post/Posts/My posts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {Post} from "./My post/Post/Post";
-import {PostType} from "../../redux/state";
+import {PostType} from "../../redux/store";
 
 type MyPostsPropsType = {
     post: Array<PostType>
