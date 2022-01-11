@@ -8,7 +8,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {store, StoreType} from "./redux/store";
+import {StoreType} from "./redux/store";
 
 type PropsType = {
     store: StoreType
@@ -30,8 +30,7 @@ export const App= (props:PropsType) => {
                                                                  messages={state.dialogsPage.messages}/>}/>
                         <Route path='/profile' element={<Profile post={state.profilePage.post}
                                                                  message={state.profilePage.messageForNewPost}
-                                                                 addPostCallBack={props.store.addPost.bind(props.store)}
-                                                                 changeTextCallback={props.store.changeNewText.bind(props.store)}
+                                                                 dispatch={props.store.dispatch.bind(props.store)}
                         />}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>

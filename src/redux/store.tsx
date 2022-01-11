@@ -35,12 +35,14 @@ export type RootStateType = {
 // }
 export type StoreType = {
     _state: RootStateType
-    changeNewText: (newText: string) => void
-    addPost:(postText: string)=>void
+    // changeNewText: (newText: string) => void
+    // addPost:(postText: string)=>void
     subscribe:(callback: () => void)=>void
     _onChange:()=>void
     getState:()=>RootStateType
+    dispatch:(action: ActionsTypes)=>void
 }
+
 
 export const store: StoreType = {
     _state: {
@@ -71,23 +73,40 @@ export const store: StoreType = {
         },
         sidebar: {},
     },
-    changeNewText(newText: string) {
-        this._state.profilePage.messageForNewPost = newText;
-        this._onChange();
-    },
-   addPost(postText: string){
-        let newPost: PostType = {id: new Date().getTime(), message: postText, likes: 0};
-        this._state.profilePage.post.push(newPost)
-        this._state.profilePage.messageForNewPost = ""
-       this._onChange();
-    },
+    dispatch(action) {
+        if(action.type==='ADD-POST'){
+            let newPost: PostType = {id: new Date().getTime(), message: action.postText, likes: 0};
+            this._state.profilePage.post.push(newPost)
+            this._state.profilePage.messageForNewPost = ""
+            this._onChange();
+        } else if (action.type==='CHANGE-NEW-TEXT') {
+            this._state.profilePage.messageForNewPost = action.newText;
+            this._onChange();
+        }
+    }
+    ,
     subscribe (callback) {
         this._onChange= callback
+    },
+    getState(){
+        return this._state
     },
     _onChange() {
         console.log('State changed')
     },
-    getState(){
-        return this._state
-    }
 }
+///////////////////////////////////////////     ACTION CREATER     //////////
+export const addPostAC = ( postText:string)=> ({
+        type: 'ADD-POST',
+        postText:postText
+    }) as const
+
+export const changeTextTypeAC = (newText:string) => {
+    return {
+        type: 'CHANGE-NEW-TEXT',
+        newText:newText
+    } as const
+}
+
+export type ActionsTypes = ReturnType<typeof addPostAC> |ReturnType<typeof changeTextTypeAC>
+

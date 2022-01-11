@@ -1,28 +1,27 @@
 import React, {ChangeEvent} from 'react';
 import s from './My posts.module.css';
 import {Post, PostType} from "../Post/Post";
+import {ActionsTypes, addPostAC, changeTextTypeAC} from "../../../../redux/store";
 
 type MyPostsPropsType = {
     post: Array<PostType>
-    addPostCallBack: (postText:string)=>void
     message:string
-    changeTextCallback: (newText:string)=>void
+    dispatch:(action: ActionsTypes)=>void
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
     let postsElement = props.post.map(p => <Post message={p.message} likes={p.likes}/>)
-    // let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const addNewUser = () => {
-        // if(newPostElement.current) {
-        //     props.addPostCallBack(newPostElement.current.value)
-        props.addPostCallBack(props.message);
-        props.changeTextCallback("")
+        // props.addPostCallBack(props.message);
+        props.dispatch(addPostAC(props.message))
+        props.dispatch(changeTextTypeAC(""))
     }
 
     const newTextChangeHandler=(e: ChangeEvent<HTMLTextAreaElement> )=>{
-        props.changeTextCallback(e.currentTarget.value)
+        props.dispatch(changeTextTypeAC(e.currentTarget.value))
+        // props.changeTextCallback(e.currentTarget.value)
     }
 
     return (
