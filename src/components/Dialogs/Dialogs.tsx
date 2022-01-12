@@ -37,7 +37,7 @@ export const Dialogs = (props: DialogsPageType) => {
                 {dialogsElements}
             </div>
             <div className={s.messages}>
-                <div>messageElement</div>
+                <div>{messageElement}</div>
                 <div>
                     <div><textarea value={newMessageBody} onChange={onNewMessageChange}
                     placeholder={'Enter you message'}></textarea></div>
