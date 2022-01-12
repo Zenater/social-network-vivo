@@ -22,6 +22,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: DialogsType[]
     messages: MessageType[]
+    newMessageBode: string
 }
 type SidebarType = {}
 
@@ -35,8 +36,6 @@ export type RootStateType = {
 // }
 export type StoreType = {
     _state: RootStateType
-    // changeNewText: (newText: string) => void
-    // addPost:(postText: string)=>void
     subscribe:(callback: () => void)=>void
     _onChange:()=>void
     getState:()=>RootStateType
@@ -69,7 +68,8 @@ export const store: StoreType = {
                 {id: 1, message: 'Yo'},
                 {id: 2, message: 'Hi'},
                 {id: 3, message: 'i tried'}
-            ]
+            ],
+            newMessageBode: '',
         },
         sidebar: {},
     },
@@ -81,6 +81,14 @@ export const store: StoreType = {
             this._onChange();
         } else if (action.type==='CHANGE-NEW-TEXT') {
             this._state.profilePage.messageForNewPost = action.newText;
+            this._onChange();
+        } else if(action.type==='UPDATE-NEW-MESSAGE-BODY') {
+            this._state.dialogsPage.newMessageBode = action.newText
+            this._onChange();
+        } else if (action.type==='SEND-MESSAGE') {
+            let body=this._state.dialogsPage.newMessageBode;
+            this._state.dialogsPage.newMessageBode='';
+            this._state.dialogsPage.messages.push({id:6,message: body});
             this._onChange();
         }
     }
@@ -107,6 +115,18 @@ export const changeTextTypeAC = (newText:string) => {
         newText:newText
     } as const
 }
+export const updateNewMessageBodeAC = (newText:string) => {
+    return {
+        type: 'UPDATE-NEW-MESSAGE-BODY',
+        newText:newText
+    }as const
+}
+export const sendMessageAC = ()=> {
+    return {
+        type: 'SEND-MESSAGE'
+    } as const
+}
 
-export type ActionsTypes = ReturnType<typeof addPostAC> |ReturnType<typeof changeTextTypeAC>
+export type ActionsTypes = ReturnType<typeof addPostAC> |ReturnType<typeof changeTextTypeAC> |
+    ReturnType<typeof updateNewMessageBodeAC >| ReturnType<typeof sendMessageAC>
 
