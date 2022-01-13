@@ -22,7 +22,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: DialogsType[]
     messages: MessageType[]
-    newMessageBode: string
+    newMessageBody:string
 }
 type SidebarType = {}
 
@@ -30,6 +30,7 @@ export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar?: SidebarType
+
 }
 // export type addPostPropsType = {
 //     addPost: (postText: string) => void
@@ -69,7 +70,7 @@ export const store: StoreType = {
                 {id: 2, message: 'Hi'},
                 {id: 3, message: 'i tried'}
             ],
-            newMessageBode: '',
+            newMessageBody: '',
         },
         sidebar: {},
     },
@@ -83,11 +84,11 @@ export const store: StoreType = {
             this._state.profilePage.messageForNewPost = action.newText;
             this._onChange();
         } else if(action.type==='UPDATE-NEW-MESSAGE-BODY') {
-            this._state.dialogsPage.newMessageBode = action.newText
+            this._state.dialogsPage.newMessageBody = action.newText
             this._onChange();
         } else if (action.type==='SEND-MESSAGE') {
-            let body=this._state.dialogsPage.newMessageBode;
-            this._state.dialogsPage.newMessageBode='';
+            let body=this._state.dialogsPage.newMessageBody;
+            this._state.dialogsPage.newMessageBody='';
             this._state.dialogsPage.messages.push({id:6,message: body});
             this._onChange();
         }
@@ -104,29 +105,21 @@ export const store: StoreType = {
     },
 }
 ///////////////////////////////////////////     ACTION CREATER     //////////
-export const addPostAC = ( postText:string)=> ({
-        type: 'ADD-POST',
-        postText:postText
-    }) as const
 
-export const changeTextTypeAC = (newText:string) => {
-    return {
-        type: 'CHANGE-NEW-TEXT',
-        newText:newText
-    } as const
-}
-export const updateNewMessageBodeAC = (newText:string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-BODY',
-        newText:newText
-    }as const
-}
+
+
 export const sendMessageAC = ()=> {
     return {
         type: 'SEND-MESSAGE'
     } as const
 }
+export const updateNewMessageBodyAC = (newText:string) => {
+    return {
+        type: 'UPDATE-NEW-MESSAGE-BODY',
+        newText:newText
+    }as const
+}
 
 export type ActionsTypes = ReturnType<typeof addPostAC> |ReturnType<typeof changeTextTypeAC> |
-    ReturnType<typeof updateNewMessageBodeAC >| ReturnType<typeof sendMessageAC>
+    ReturnType<typeof updateNewMessageBodyAC >| ReturnType<typeof sendMessageAC>
 

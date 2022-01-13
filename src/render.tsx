@@ -5,7 +5,7 @@ import {store} from "./redux/store";
 
 export const renderTree = () => {
   ReactDOM.render(<React.StrictMode>
-      <App store={store}/>
+      <App store={store} />
   </React.StrictMode>,
       document.getElementById("root"))
 }
