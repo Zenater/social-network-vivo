@@ -1,4 +1,7 @@
 import React from 'react';
+import {ActionsTypes, dialogsReducer} from "./dialogsReducer";
+import {profileReducer} from "./profileReducer";
+import {sidebarReducer} from "./sidebarReducer";
 
 export type MessageType = {
     id: number
@@ -75,23 +78,10 @@ export const store: StoreType = {
         sidebar: {},
     },
     dispatch(action) {
-        if(action.type==='ADD-POST'){
-            let newPost: PostType = {id: new Date().getTime(), message: action.postText, likes: 0};
-            this._state.profilePage.post.push(newPost)
-            this._state.profilePage.messageForNewPost = ""
-            this._onChange();
-        } else if (action.type==='CHANGE-NEW-TEXT') {
-            this._state.profilePage.messageForNewPost = action.newText;
-            this._onChange();
-        } else if(action.type==='UPDATE-NEW-MESSAGE-BODY') {
-            this._state.dialogsPage.newMessageBody = action.newText
-            this._onChange();
-        } else if (action.type==='SEND-MESSAGE') {
-            let body=this._state.dialogsPage.newMessageBody;
-            this._state.dialogsPage.newMessageBody='';
-            this._state.dialogsPage.messages.push({id:6,message: body});
-            this._onChange();
-        }
+this._state.profilePage=profileReducer(this._state.profilePage,action);
+this._state.dialogsPage=dialogsReducer(this._state.dialogsPage,action);
+// this._state.sidebar=sidebarReducer(this._state.sidebar,action);
+// this.subscribe(this._state)
     }
     ,
     subscribe (callback) {
@@ -108,18 +98,6 @@ export const store: StoreType = {
 
 
 
-export const sendMessageAC = ()=> {
-    return {
-        type: 'SEND-MESSAGE'
-    } as const
-}
-export const updateNewMessageBodyAC = (newText:string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-BODY',
-        newText:newText
-    }as const
-}
 
-export type ActionsTypes = ReturnType<typeof addPostAC> |ReturnType<typeof changeTextTypeAC> |
-    ReturnType<typeof updateNewMessageBodyAC >| ReturnType<typeof sendMessageAC>
+
 
