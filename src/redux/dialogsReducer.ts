@@ -1,39 +1,39 @@
-import {PostType, StoreType} from "./store";
-
 
 let initialState = {
-        dialogs: [
-            {id: 1, name: 'Valera'},
-            {id: 2, name: 'Sveta'},
-            {id: 3, name: 'Jon'},
-            {id: 4, name: 'Victor'},
-            {id: 5, name: 'Oleg'},
-            {id: 6, name: 'Igor'}
-        ],
-        messages: [
-            {id: 1, message: 'Yo'},
-            {id: 2, message: 'Hi'},
-            {id: 3, message: 'i tried'}
-        ],
-        newMessageBody: '',
-    }
+    dialogs: [
+        {id: 1, name: 'Valera'},
+        {id: 2, name: 'Sveta'},
+        {id: 3, name: 'Jon'},
+        {id: 4, name: 'Victor'},
+        {id: 5, name: 'Oleg'},
+        {id: 6, name: 'Igor'}
+    ],
+    messages: [
+        {id: 1, message: 'Yo'},
+        {id: 2, message: 'Hi'},
+        {id: 3, message: 'i tried'}
+    ],
+    newMessageBody: '',
+}
 
-export const dialogsReducer = (state=initialState, action: ActionsTypes) => {
+export const dialogsReducer = (state = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case 'UPDATE-NEW-MESSAGE-BODY': {
-            state.newMessageBody = action.newText
-            // state._state.dialogsPage.newMessageBody = action.newText
-            // // this._onChange();
-            return state
+            return {
+                ...state,
+                newMessageBody: action.newText
+            };
         }
         case 'SEND-MESSAGE': {
             let body = state.newMessageBody;
-            state.newMessageBody = '';
-            state.messages.push({id: 6, message: body});
-            // this._onChange();
-            return state
+            return {
+                ...state,
+                newMessageBody: '',
+                messages: [...state.messages, {id: 7, message: body}]
+            };
         }
-        default:return state
+        default:
+            return state
     }
 }
 

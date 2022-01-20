@@ -1,5 +1,4 @@
-import { PostType, StoreType} from "./store";
-
+import {PostType } from "./store";
 
 let initialState = {
     messageForNewPost: "",
@@ -11,36 +10,40 @@ let initialState = {
     ],
 }
 
-export const profileReducer = (state= initialState ,action:ActionsTypes)=> {
+export const profileReducer = (state = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case 'ADD-POST': {
-            let newPost: PostType = {id: new Date().getTime(),
-                message: action.postText, likes: 0};
-            state.post.push(newPost)
-            // state._state.profilePage.post.push(newPost)
-             state.messageForNewPost = ""
-            // state._state.profilePage.messageForNewPost='';
-          return state
+            let newPost: PostType = {
+                id: new Date().getTime(),
+                message: action.postText, likes: 0
+            };
+            return {
+                ...state,
+                post: [...state.post, newPost],
+                newPostText: ''
+            };
         }
         case 'CHANGE-NEW-TEXT': {
-      state.messageForNewPost=action.newText
-          // state._state.profilePage.messageForNewPost = action.newText
-            return state
+            return {
+                ...state,
+                messageForNewPost: action.newText
+            };
         }
-        default: return state
+        default:
+            return state
     }
 }
 
-export const addPostAC = ( postText:string)=> ({
+export const addPostAC = (postText: string) => ({
     type: 'ADD-POST',
-    postText:postText
+    postText: postText
 }) as const
 
-export const changeTextTypeAC = (newText:string) => {
+export const changeTextTypeAC = (newText: string) => {
     return {
         type: 'CHANGE-NEW-TEXT',
-        newText:newText
+        newText: newText
     } as const
 }
 
-export type ActionsTypes = ReturnType<typeof addPostAC> |ReturnType<typeof changeTextTypeAC>
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeTextTypeAC>

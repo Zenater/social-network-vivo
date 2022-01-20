@@ -9,6 +9,7 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {StoreType} from "./redux/store";
+import UsersContainer from "./components/Users/UsersContainer";
 
 type PropsType = {
     store: StoreType
@@ -29,13 +30,12 @@ export const App= (props:PropsType) => {
                         <Route path='/dialogs' element={<Dialogs dialogs={state.dialogsPage.dialogs}
                                                                  messages={state.dialogsPage.messages}
                                                                  dispatch={props.store.dispatch.bind(props.store)}
-                                                                 newMessageBode={state.dialogsPage.newMessageBody}
-                        />}/>
+                                                                 newMessageBode={state.dialogsPage.newMessageBody}/>}/>
                         <Route path='/profile' element={<Profile post={state.profilePage.post}
                                                                  message={state.profilePage.messageForNewPost}
-                                                                 dispatch={props.store.dispatch.bind(props.store)}
-                        />}/>
+                                                                 dispatch={props.store.dispatch.bind(props.store)}/>}/>
                         <Route path='/news' element={<News/>}/>
+                        <Route path='/users' element={<UsersContainer/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/settings' element={<Settings/>}/>
                     </Routes>
