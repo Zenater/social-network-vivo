@@ -1,8 +1,22 @@
 import React from 'react';
 import s from './User.module.css';
+import {UsersPropsType} from "./UsersContainer";
 
-const Users = (props) => {
-    if(props.users.lenght ===0) {
+// export type UsersType = {
+//     id: number,
+//     photoUrl:string
+//     followed:boolean
+//     status:string
+//     location: UserLocation
+//     fullName:string
+// }
+// export type UserLocation = {
+//     city: string
+//     country:string
+// }
+
+export const Users = (props: UsersPropsType) => {
+    if(props.usersPage.users.length ===0) {
         props.setUsers([
             {id: 1, photoUrl:'https://bigpicture.ru/wp-content/uploads/2012/09/lisie-11.jpg',
                 followed: false,fullName:'Dima',status: 'i am boss',location:{city:'Minsk',country:'RF'}},
@@ -16,7 +30,7 @@ const Users = (props) => {
 
     return <div>
         {
-            props.users.map(u => <div key={u.id}>
+            props.usersPage.users.map(u => <div key={u.id}>
             <span>
                 <div>
                     <img src={u.photoUrl} className={s.userPhoto}/>
@@ -38,9 +52,7 @@ const Users = (props) => {
                     <div>{u.location.city}</div>
                 </span>
             </div>
+            )
         }
     </div>
-
 };
-
-export default Users;

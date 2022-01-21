@@ -5,25 +5,35 @@ import {Message} from "./Message/Message";
 import {DialogsType, MessageType} from "../../redux/store";
 import {ActionsTypes, sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogsReducer";
 
-
+// export type DialogsPropsType = {
+//     dialogs: DialogsType[]
+//     messages: MessageType[]
+//     newMessageBody: string
+//     dispatch: (action: ActionsTypes) => void
+// } my old
 export type DialogsPropsType = {
     dialogs: DialogsType[]
     messages: MessageType[]
-    newMessageBode: string
-    dispatch: (action: ActionsTypes) => void
+    newMessageText: (newMessage: string) =>void
+    addMessage: () =>void
+    messagePage: MessageType
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
 
     const dialogsElements = props.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
     const messageElement = props.messages.map(m => <Message message={m.message}/>);
-    const newMessageBody = props.newMessageBode;
+    const newMessageBody = props.newMessageBody;
 
     const onSendMessageClick = () => {
         props.dispatch(sendMessageAC())
     }
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewMessageBodyAC(e.currentTarget.value))
+       dispatch(updateNewMessageBodyAC(e.currentTarget.value))
+    }
+
+    const onAddMessage=()=>{
+        props.addMessage()
     }
 
     return (

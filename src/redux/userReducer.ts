@@ -1,9 +1,14 @@
+import {UsersType} from "../components/Users/Users";
 
-let initialState = {
+
+export type InitialStateType = {
+    users:Array<UsersType>
+}
+const InitialState:InitialStateType = {
     users:[]
 }
 
-export const userReducer = (state = initialState, action: ActionsTypes) => {
+export const userReducer = (state:InitialStateType = InitialState, action: ActionsTypes):InitialStateType => {
     switch (action.type) {
         case 'FOLLOW': {
             return {
@@ -41,17 +46,17 @@ export const userReducer = (state = initialState, action: ActionsTypes) => {
     }
 }
 
-export const followAC = (userId: string) => ({
+export const followAC = (userId: number) => ({
     type: 'FOLLOW',
     userId: userId
 }) as const
 
-export const unfollowAC = (userId: string) => {
+export const unfollowAC = (userId: number) => {
     return {
         type: 'UNFOLLOW',
         userId: userId
     } as const
 }
-export const setUsersAC = (users: string) =>({type: 'SET-USERS', users} as const)
+export const setUsersAC = (users: Array<UsersType>) =>({type: 'SET-USERS', users} as const)
 
 export type ActionsTypes = ReturnType<typeof followAC> | ReturnType<typeof unfollowAC>|ReturnType<typeof setUsersAC>
