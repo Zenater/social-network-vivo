@@ -1,13 +1,19 @@
 import React from 'react';
-import {InitialStateType} from "../../redux/userReducer";
 import {connect} from "react-redux";
-import {AppRootStateType} from "../../redux/storeRedux";
+import {AppRootStateType, store} from "../../redux/storeRedux";
 import {Dispatch} from "redux";
 import {Dialogs} from "./Dialogs";
-import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogsReducer";
+import {
+    DialogsType,
+    MessageType,
+    sendMessageAC,
+    updateNewMessageBodyAC
+} from "../../redux/dialogsReducer";
 
 export type MapStateToPropsType = {
-    messagePage: InitialStateType
+    dialogs: DialogsType[],
+    messages: MessageType[],
+    newMessageBody: string
 }
 export type MapDispatchToPropsType = {
     newMessageText: (newMessage: string) => void
@@ -16,8 +22,9 @@ export type MapDispatchToPropsType = {
 
 const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
-        messagePage: state.messagePage
-        // messagePage: props.messagePage
+        dialogs: state.dialogsPage.dialogs,
+        messages: state.dialogsPage.messages,
+    newMessageBody: state.dialogsPage.newMessageBody,
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
@@ -25,12 +32,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         newMessageText: (newMessage: string) => {
             dispatch(updateNewMessageBodyAC(newMessage))
         },
-        addMessage: () => {
-            dispatch(sendMessageAC())
-        }
+        addMessage: () => dispatch(sendMessageAC())
     }
 }
-
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Users);
-export const DialogContainer = connect(mapStateToProps,mapDispatchToProps(Dialogs))
+export const DialogContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs)

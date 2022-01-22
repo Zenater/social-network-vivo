@@ -1,4 +1,4 @@
-import {PostType } from "./store";
+import {PostType} from "./dialogsReducer";
 
 let initialState = {
     messageForNewPost: "",

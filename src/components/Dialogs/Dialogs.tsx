@@ -2,8 +2,13 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogsType, MessageType} from "../../redux/store";
-import {ActionsTypes, sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogsReducer";
+import {
+    ActionsTypes,
+    DialogsType,
+    MessageType,
+    sendMessageAC,
+    updateNewMessageBodyAC
+} from "../../redux/dialogsReducer";
 
 // export type DialogsPropsType = {
 //     dialogs: DialogsType[]
@@ -16,7 +21,7 @@ export type DialogsPropsType = {
     messages: MessageType[]
     newMessageText: (newMessage: string) =>void
     addMessage: () =>void
-    messagePage: MessageType
+    newMessageBody: string
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -25,13 +30,9 @@ export const Dialogs = (props: DialogsPropsType) => {
     const messageElement = props.messages.map(m => <Message message={m.message}/>);
     const newMessageBody = props.newMessageBody;
 
-    const onSendMessageClick = () => {
-        props.dispatch(sendMessageAC())
-    }
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-       dispatch(updateNewMessageBodyAC(e.currentTarget.value))
+      props.newMessageText(e.currentTarget.value)
     }
-
     const onAddMessage=()=>{
         props.addMessage()
     }
@@ -51,7 +52,7 @@ export const Dialogs = (props: DialogsPropsType) => {
                     </textarea>
                     </div>
                     <div>
-                        <button onClick={onSendMessageClick}>send</button>
+                        <button onClick={onAddMessage}>send</button>
                     </div>
                 </div>
             </div>

@@ -1,14 +1,22 @@
-import {UsersType} from "../components/Users/Users";
+import {UserLocation} from "../components/Users/Users";
 
+export type UsersType = {
+    id: number,
+    photoUrl:string
+    followed:boolean
+    status:string
+    location: UserLocation
+    fullName:string
+}
 
-export type InitialStateType = {
+export type InitialStateTypeUsers = {
     users:Array<UsersType>
 }
-const InitialState:InitialStateType = {
+const InitialState:InitialStateTypeUsers = {
     users:[]
 }
 
-export const userReducer = (state:InitialStateType = InitialState, action: ActionsTypes):InitialStateType => {
+export const userReducer = (state:InitialStateTypeUsers = InitialState, action: ActionsTypes):InitialStateTypeUsers => {
     switch (action.type) {
         case 'FOLLOW': {
             return {

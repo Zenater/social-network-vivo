@@ -7,9 +7,9 @@ import {userReducer} from "./userReducer";
 // мы задаём структуру нашего единственного объекта-состояния
 const rootReducer = combineReducers({
     profileReducer,
-    dialogsReducer,
     sidebarReducer,
-    userReducer
+    usersPage: userReducer,
+    dialogsPage: dialogsReducer,
 })
 // непосредственно создаём store
 export const store = createStore(rootReducer);

@@ -6,7 +6,7 @@ import {ActionsTypes, addPostAC, changeTextTypeAC} from "../../../../redux/profi
 type MyPostsPropsType = {
     post: Array<PostType>
     message:string
-    dispatch:(action: ActionsTypes)=>void
+    // dispatch:(action: ActionsTypes)=>void
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
@@ -15,13 +15,13 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
     const addNewUser = () => {
         // props.addPostCallBack(props.message);
-        props.dispatch(addPostAC(props.message))
-        props.dispatch(changeTextTypeAC(""))
+        // dispatch(addPostAC(props.message))
+        // dispatch(changeTextTypeAC(""))
     }
 
     const newTextChangeHandler=(e: ChangeEvent<HTMLTextAreaElement> )=>{
-        props.dispatch(changeTextTypeAC(e.currentTarget.value))
-        // props.changeTextCallback(e.currentTarget.value)
+        // props.dispatch(changeTextTypeAC(e.currentTarget.value))
+        // // props.changeTextCallback(e.currentTarget.value)
     }
 
     return (
