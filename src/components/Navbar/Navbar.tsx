@@ -20,6 +20,8 @@ export const Navbar = () => {
             </div>
             <div className={s.item}>
                 <NavLink to='/settings' className={({isActive}) =>  isActive ? s.gold : s.white}>Settings</NavLink>
+            </div>    <div className={s.item}>
+                <NavLink to='/users' className={({isActive}) =>  isActive ? s.gold : s.white}>Users</NavLink>
             </div>
         </nav>
     )

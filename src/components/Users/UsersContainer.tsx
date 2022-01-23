@@ -15,6 +15,19 @@ export type MapDispatchToPropsType = {
     setUsers: (users: Array<UsersType>) => void
 }
 
+// "items": [
+//     {
+//         "name": "Vadimlyitsko2465877",
+//         "id": 21989,
+//         "uniqueUrlName": null,
+//         "photos": {
+//             "small": null,
+//             "large": null
+//         },
+//         "status": null,
+//         "followed": false
+//     },
+
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
