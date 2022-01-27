@@ -1,5 +1,12 @@
 import React from 'react';
-import {followAC, InitialStateTypeUsers, setUsersAC, unfollowAC, UsersType} from "../../redux/userReducer";
+import {
+    followAC,
+    InitialStateTypeUsers,
+    setCurrentPageAC, setTotalUsersCountAC,
+    setUsersAC,
+    unfollowAC,
+    UsersType
+} from "../../redux/userReducer";
 import {connect} from "react-redux";
 import {Users} from "./Users";
 import {AppRootStateType} from "../../redux/storeRedux";
@@ -8,31 +15,27 @@ import {Dispatch} from "redux";
 
 export type MapStateToPropsType = {
     usersPage: InitialStateTypeUsers
+    pageSize:InitialStateTypeUsers,
+    totalUsersCount: InitialStateTypeUsers,
+    currentPage: InitialStateTypeUsers
+
 }
 export type MapDispatchToPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     setUsers: (users: Array<UsersType>) => void
+    setCurrentPage:(currentPage: number) => void
+    setTotalUsersCount: (totalCount: number) =>void
 }
-
-// "items": [
-//     {
-//         "name": "Vadimlyitsko2465877",
-//         "id": 21989,
-//         "uniqueUrlName": null,
-//         "photos": {
-//             "small": null,
-//             "large": null
-//         },
-//         "status": null,
-//         "followed": false
-//     },
 
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
-        usersPage: state.usersPage
+        usersPage: state.usersPage,
+        pageSize: state.usersPage,
+        totalUsersCount: state.usersPage,
+        currentPage: state.usersPage,
     }
 }
 
@@ -46,6 +49,12 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         },
         setUsers: (users: Array<UsersType>) => {
             dispatch(setUsersAC(users))
+        },
+        setCurrentPage: (currentPage: number) => {
+            dispatch(setCurrentPageAC(currentPage))
+        },
+        setTotalUsersCount: (totalCount: number) => {
+            dispatch(setTotalUsersCountAC(totalCount))
         },
     }
 }
