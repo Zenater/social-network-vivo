@@ -1,4 +1,4 @@
-import {UserLocation} from "../components/Users/Users";
+import {UserLocation} from "../components/Users/UsersContainer";
 
 export type UsersType = {
     id: number,
@@ -8,7 +8,6 @@ export type UsersType = {
     location: UserLocation
     fullName: string
     photos: PhotosType
-
 
 }
 export type PhotosType = {
@@ -46,6 +45,9 @@ export const userReducer = (state: InitialStateTypeUsers = InitialStateUsers, ac
         case "SET-TOTAL-USERS-COUNT": {
             return {...state,totalUsersCount: action.totalUsersCount}
         }
+        case "TOOGGLE-IS-FETCHING": {
+            return {...state,isFetching: action.isFetching}
+        }
         default:
             return state
     }
@@ -65,6 +67,7 @@ export const unfollowAC = (userId: number) => {
 export const setUsersAC = (users: Array<UsersType>) => ({type: 'SET-USERS', users} as const)
 export const setCurrentPageAC = (currentPage: number) => ({type: 'SET-CURREN-PAGE', currentPage} as const)
 export const setTotalUsersCountAC = (totalUsersCount: number) => ({type: 'SET-TOTAL-USERS-COUNT', totalUsersCount} as const)
+export const toggleIsFetchingAC = (isFetching: number) => ({type: 'TOOGGLE-IS-FETCHING', isFetching} as const)
 
 export type ActionsTypes = ReturnType<typeof followAC> | ReturnType<typeof unfollowAC> | ReturnType<typeof setUsersAC> |
-    ReturnType<typeof setCurrentPageAC> | ReturnType<typeof setTotalUsersCountAC>
+    ReturnType<typeof setCurrentPageAC> | ReturnType<typeof setTotalUsersCountAC>| ReturnType<typeof toggleIsFetchingAC>
