@@ -1,6 +1,6 @@
 import {PostType} from "./dialogsReducer";
 
-let initialState = {
+let initialStateProfile = {
     messageForNewPost: "",
     post: [
         {id: 1, message: "hi, how are you?", likes: 12},
@@ -8,9 +8,32 @@ let initialState = {
         {id: 3, message: "It my dog", likes: 5},
         {id: 4, message: "Hello everyone", likes: 4}
     ],
+    profile:  "",
+    newPostText:""
+}
+export type initialStateProfileType = {
+    messageForNewPost: string,
+    post: Post[],
+    profile: string
+    // photos: PhotosType
+    newPostText:string
 }
 
-export const profileReducer = (state = initialState, action: ActionsTypes) => {
+type Post = {
+    id: number
+    message:string
+    likes: number
+}
+
+// photos: PhotosType
+
+
+export type PhotosType = {
+    small: null
+    large: null
+}
+
+export const profileReducer = (state : initialStateProfileType= initialStateProfile, action: ActionsTypes):initialStateProfileType => {
     switch (action.type) {
         case 'ADD-POST': {
             let newPost: PostType = {
@@ -29,6 +52,12 @@ export const profileReducer = (state = initialState, action: ActionsTypes) => {
                 messageForNewPost: action.newText
             };
         }
+        case "SET-USER-PROFILE": {
+            return {
+                ...state,
+                profile: action.profile
+            };
+        }
         default:
             return state
     }
@@ -45,5 +74,12 @@ export const changeTextTypeAC = (newText: string) => {
         newText: newText
     } as const
 }
+export const setUsersProfile = (profile: string) => {
+    return {
+        type: 'SET-USER-PROFILE',
+       profile
+    } as const
+}
 
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeTextTypeAC>
+
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeTextTypeAC>| ReturnType<typeof setUsersProfile>

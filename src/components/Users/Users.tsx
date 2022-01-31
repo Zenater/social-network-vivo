@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./User.module.css";
 import userPhoto from "../../assests/img/users.jpg";
-import {InitialStateTypeUsers, UsersType} from "../../redux/userReducer";
+import {UsersType} from "../../redux/userReducer";
 
 export type UsersForUsers = {
     totalUsersCount: number,
@@ -10,7 +10,6 @@ export type UsersForUsers = {
     onPageChanged:(pageNumber: number) =>void
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    //usersPage: InitialStateTypeUsers,
     users: UsersType[]
 }
 export const Users = (props:UsersForUsers) => {

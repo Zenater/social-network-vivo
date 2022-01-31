@@ -8,21 +8,20 @@ import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import UsersContainer from "./components/Users/UsersContainer";
 import {DialogContainer} from "./components/Dialogs/DialogsContainer";
+import {Profile} from "./components/Profile/Profile";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 
 export const App = () => {
+
     return (
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar/>
-                {/*     <Settings/>*/}
                 <div className={'app-wrapper-content'}>
                     <Routes>
                         <Route path='/dialogs' element={<DialogContainer/>}/>
-                        {/*<Route path='/profile' element={<Profile post={props.profileReducer.post}*/}
-                        {/*                                         message={props.profileReducer.messageForNewPost}*/}
-                        {/*    // dispatch={props.store.dispatch.bind(props.store)}*/}
-                        {/*/>}/>*/}
+                        <Route path='/profile/:userID?' element={<ProfileContainer />}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/users' element={<UsersContainer/>}/>
                         <Route path='/music' element={<Music/>}/>

@@ -11,8 +11,8 @@ export type UsersType = {
 
 }
 export type PhotosType = {
-    small: null
-    large: null
+    small: string | undefined
+    large: string | undefined
 }
 
 export type InitialStateTypeUsers = {
@@ -55,21 +55,21 @@ export const userReducer = (state: InitialStateTypeUsers = InitialStateUsers, ac
     }
 }
 
-export const followAC = (userId: number) => ({
+export const follow = (userId: number) => ({
     type: 'FOLLOW',
     userId: userId
 }) as const
 
-export const unfollowAC = (userId: number) => {
+export const unfollow = (userId: number) => {
     return {
         type: 'UNFOLLOW',
         userId: userId
     } as const
 }
-export const setUsersAC = (users: Array<UsersType>) => ({type: 'SET-USERS', users} as const)
-export const setCurrentPageAC = (currentPage: number) => ({type: 'SET-CURREN-PAGE', currentPage} as const)
-export const setTotalUsersCountAC = (totalCount: number) => ({type: 'SET-TOTAL-USERS-COUNT', totalCount} as const)
-export const toggleIsFetchingAC = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching} as const)
+export const setUsers = (users: Array<UsersType>) => ({type: 'SET-USERS', users} as const)
+export const setCurrentPage = (currentPage: number) => ({type: 'SET-CURREN-PAGE', currentPage} as const)
+export const setTotalUsersCount = (totalCount: number) => ({type: 'SET-TOTAL-USERS-COUNT', totalCount} as const)
+export const toggleIsFetching = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching} as const)
 
-export type ActionsTypes = ReturnType<typeof followAC> | ReturnType<typeof unfollowAC> | ReturnType<typeof setUsersAC> |
-    ReturnType<typeof setCurrentPageAC> | ReturnType<typeof setTotalUsersCountAC>| ReturnType<typeof toggleIsFetchingAC>
+export type ActionsTypes = ReturnType<typeof follow> | ReturnType<typeof unfollow> | ReturnType<typeof setUsers> |
+    ReturnType<typeof setCurrentPage> | ReturnType<typeof setTotalUsersCount>| ReturnType<typeof toggleIsFetching>
