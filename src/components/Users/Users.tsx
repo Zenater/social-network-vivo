@@ -10,8 +10,8 @@ export type UsersForUsers = {
     onPageChanged:(pageNumber: number) =>void
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    usersPage: InitialStateTypeUsers,
-    users: UsersType
+    //usersPage: InitialStateTypeUsers,
+    users: UsersType[]
 }
 export const Users = (props:UsersForUsers) => {
 
@@ -30,7 +30,7 @@ export const Users = (props:UsersForUsers) => {
             })}
         </div>
         {
-            props.usersPage.users.map(u => <div key={u.id}>
+            props.users.map(u => <div key={u.id}>
             <span>
                 <div>
                     <img src={u.photos.small != null ? u.photos.small : userPhoto} className={s.userPhoto}/>

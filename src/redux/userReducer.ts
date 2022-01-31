@@ -17,15 +17,17 @@ export type PhotosType = {
 
 export type InitialStateTypeUsers = {
     users: Array<UsersType>
-    totalUsersCount: number
+    totalCount: number
     pageSize:number
     currentPage: number
+    isFetching: boolean
 }
 let InitialStateUsers: InitialStateTypeUsers = {
     users: [],
     pageSize: 5,
-    totalUsersCount: 0,
-    currentPage: 2
+    totalCount: 0,
+    currentPage: 2,
+    isFetching: true
 }
 
 export const userReducer = (state: InitialStateTypeUsers = InitialStateUsers, action: ActionsTypes): InitialStateTypeUsers => {
@@ -43,9 +45,9 @@ export const userReducer = (state: InitialStateTypeUsers = InitialStateUsers, ac
             return {...state, currentPage:action.currentPage }
         }
         case "SET-TOTAL-USERS-COUNT": {
-            return {...state,totalUsersCount: action.totalUsersCount}
+            return {...state,totalCount: action.totalCount}
         }
-        case "TOOGGLE-IS-FETCHING": {
+        case "TOGGLE-IS-FETCHING": {
             return {...state,isFetching: action.isFetching}
         }
         default:
@@ -66,8 +68,8 @@ export const unfollowAC = (userId: number) => {
 }
 export const setUsersAC = (users: Array<UsersType>) => ({type: 'SET-USERS', users} as const)
 export const setCurrentPageAC = (currentPage: number) => ({type: 'SET-CURREN-PAGE', currentPage} as const)
-export const setTotalUsersCountAC = (totalUsersCount: number) => ({type: 'SET-TOTAL-USERS-COUNT', totalUsersCount} as const)
-export const toggleIsFetchingAC = (isFetching: number) => ({type: 'TOOGGLE-IS-FETCHING', isFetching} as const)
+export const setTotalUsersCountAC = (totalCount: number) => ({type: 'SET-TOTAL-USERS-COUNT', totalCount} as const)
+export const toggleIsFetchingAC = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching} as const)
 
 export type ActionsTypes = ReturnType<typeof followAC> | ReturnType<typeof unfollowAC> | ReturnType<typeof setUsersAC> |
     ReturnType<typeof setCurrentPageAC> | ReturnType<typeof setTotalUsersCountAC>| ReturnType<typeof toggleIsFetchingAC>
