@@ -2,7 +2,7 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import {PhotosType} from "../../../redux/userReducer";
 type ProfileInfoType = {
-    profile: string | undefined
+    profile: any
     // photos: PhotosType
 }
 // photos: PhotosType
