@@ -20,26 +20,26 @@ export type MapDispatchProfile = {
 export type Owntype = MapStateToPropsTypeProfile & MapDispatchProfile
 export type ProfileContainerType = PathParamsType & Owntype
 
-function ProfileContainer(props: ProfileContainerType) {
 
-    useEffect(() => {
-        let userID = props.userID;
+
+export class ProfileContainer extends React.Component<ProfileContainerType ,{}> {
+
+    componentDidMount() {
+        let userID = this.props.userID;
         if (!userID) {
             userID = 2;
         }
         axios.get<any>(`https://social-network.samuraijs.com/api/1.0/profile/` + userID)
             .then(responce => {
-                props.setUsersProfile(responce.data)
+               this.props.setUsersProfile(responce.data)
             });
-    }, [])
+    }
 
-
-    return (
-        <div>
-            <Profile profile={props.profile } userID={props.userID} setUsersProfile={props.setUsersProfile}/>
-        </div>
-    );
-
+    render() {
+        return <>
+            <Profile {...this.props} profile={this.props.profile}/>
+        </>
+    }
 }
 
 const mapStateToProps = (state: AppRootStateType): MapStateToPropsTypeProfile => {

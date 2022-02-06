@@ -2,20 +2,8 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {
-    ActionsTypes,
-    DialogsType,
-    MessageType,
-    sendMessageAC,
-    updateNewMessageBodyAC
-} from "../../redux/dialogsReducer";
+import {DialogsType, MessageType} from "../../redux/dialogsReducer";
 
-// export type DialogsPropsType = {
-//     dialogs: DialogsType[]
-//     messages: MessageType[]
-//     newMessageBody: string
-//     dispatch: (action: ActionsTypes) => void
-// } my old
 export type DialogsPropsType = {
     dialogs: DialogsType[]
     messages: MessageType[]

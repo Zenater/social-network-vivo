@@ -3,6 +3,7 @@ import {profileReducer} from "./profileReducer";
 import {dialogsReducer} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {userReducer} from "./userReducer";
+import {authReducer} from "./authReducer";
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
     sidebarReducer,
     usersPage: userReducer,
     dialogsPage: dialogsReducer,
+    auth:authReducer
 })
 // непосредственно создаём store
 export const store = createStore(rootReducer);
