@@ -29,14 +29,14 @@ export  const Header = () => {
                }
            }
        )
-   })
+   },[])
 
     return (
         <header className={s.header}>
             <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvqs4OcIVXVzUFn9Kz1k66lVAJf-LPO-6jDg&usqp=CAU'/>
 
        <div className={s.loginBlock}>
-           {/*{props.isAuth ? props.login}*/}?????????
+           {/*{props.isAuth ? props.login}                           ?????*/}
            <NavLink to={'/login'}>Login</NavLink>
        </div>
         </header>

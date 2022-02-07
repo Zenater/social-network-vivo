@@ -23,16 +23,16 @@ if(!props.profile) {
     return <Preloader/>
 }
 
-useEffect(()=> {
-    let userID = props.userID;
-    if (!userID) {
-        userID = 2;
-    }
-    axios.get<any>(`https://social-network.samuraijs.com/api/1.0/profile/` + userID)
-        .then(responce => {
-            props.setUsersProfile(responce.data)
-        });
-})
+// useEffect(()=> {
+    // let userID = props.userID;
+    // if (!userID) {
+    //     userID = 2;
+    // }
+//     axios.get<any>(`https://social-network.samuraijs.com/api/1.0/profile/` + userID)
+//         .then(responce => {
+//             props.setUsersProfile(responce.data)
+//         });
+// })
 
     return (
         <div>

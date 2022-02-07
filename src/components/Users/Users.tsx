@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./User.module.css";
 import userPhoto from "../../assests/img/users.jpg";
 import {UsersType} from "../../redux/userReducer";
+import axios from "axios";
 
 export type UsersForUsers = {
     totalUsersCount: number,
@@ -36,8 +37,30 @@ export const Users = (props:UsersForUsers) => {
                 </div>
                 <div>
                     {u.followed
-                        ? <button onClick={() => props.unfollow(u.id)}>unfollow</button>
-                        : <button onClick={() => props.follow(u.id)}>Follow</button>}
+                        ? <button onClick={() => {
+                            axios.delete<any>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                                {withCredentials: true,
+                                headers: {
+                                    'API-KEY': 'fb2ab079-08d1-443f-b919-56e507e1bcd7'
+                                }})
+                                .then(responce => {
+                                    if (responce.data.resultCode === 0) {
+                                        props.unfollow(u.id);
+                                    }
+                                });
+                                }}>Unfollow </button>
+                        : <button onClick={() =>
+                            axios.post<any>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{},
+                                {withCredentials: true,
+                                    headers: {
+                                        'API-KEY': 'fb2ab079-08d1-443f-b919-56e507e1bcd7'
+                                    }})
+                                .then(responce => {
+                                    if (responce.data.resultCode === 0) {
+                                        props.follow(u.id);
+                                    }
+                                })
+                         }>Follow</button>}
                 </div>
             </span>
                     <span>
