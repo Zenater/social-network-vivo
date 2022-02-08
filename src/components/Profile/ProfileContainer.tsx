@@ -20,9 +20,6 @@ export type MapDispatchProfile = {
 
 export type Owntype = MapStateToPropsTypeProfile & MapDispatchProfile
 export type ProfileContainerType = PathParamsType & Owntype
-
-
-
 // export class ProfileContainer extends React.Component<ProfileContainerType> {
 //
 //     componentDidMount() {
@@ -67,19 +64,21 @@ const mapStateToProps = (state: AppRootStateType): MapStateToPropsTypeProfile =>
 //     return witRouterComponent;
 // };
 
-
 // let WithRouterComponent:any = withRouter(ProfileContainer)({})
 
 // export default connect<MapStateToPropsTypeProfile, MapDispatchProfile, {}, AppRootStateType>(mapStateToProps, {setUsersProfile})(WithRouterComponent);
 const ProfileContainer = (props:ProfileContainerType)=>{
-    let {userID} = useParams<any>();//type!
+    // let {userID} = useParams<any>();//type!
 
-    console.log(userID)
     console.log("test")
 
     useEffect(()=>{
-        let testId = userID || 1
-        axios.get<any>(`https://social-network.samuraijs.com/api/1.0/profile/`+testId )
+        let userID = 0
+        if (!userID) {
+            userID = 2;
+        }
+        // let testId = userID || 1
+        axios.get<any>(`https://social-network.samuraijs.com/api/1.0/profile/2` )
             .then(responce => {
                 props.setUsersProfile(responce.data)
             });

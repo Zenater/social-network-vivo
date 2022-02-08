@@ -21,13 +21,17 @@ export type InitialStateTypeUsers = {
     pageSize:number
     currentPage: number
     isFetching: boolean
+    followingInProgress: number[]
+    // toggleFollowingProgress:(isFetching: boolean,userId: number)=>void
+
 }
 let InitialStateUsers: InitialStateTypeUsers = {
     users: [],
     pageSize: 5,
     totalCount: 0,
     currentPage: 2,
-    isFetching: true
+    isFetching: true,
+    followingInProgress: [],
 }
 
 export const userReducer = (state: InitialStateTypeUsers = InitialStateUsers, action: ActionsTypes): InitialStateTypeUsers => {
@@ -50,6 +54,14 @@ export const userReducer = (state: InitialStateTypeUsers = InitialStateUsers, ac
         case "TOGGLE-IS-FETCHING": {
             return {...state,isFetching: action.isFetching}
         }
+        case "TOGGLE-IS-FOLLOWING-PROGRESS": {
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+            ? [...state.followingInProgress,action.userId]
+                    : state.followingInProgress.filter(id=>id!=action.userId)
+            }
+        }
         default:
             return state
     }
@@ -70,6 +82,9 @@ export const setUsers = (users: Array<UsersType>) => ({type: 'SET-USERS', users}
 export const setCurrentPage = (currentPage: number) => ({type: 'SET-CURREN-PAGE', currentPage} as const)
 export const setTotalUsersCount = (totalCount: number) => ({type: 'SET-TOTAL-USERS-COUNT', totalCount} as const)
 export const toggleIsFetching = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching} as const)
+export const toggleFollowingProgress=(isFetching: boolean,userId: number)=>
+    ({type: 'TOGGLE-IS-FOLLOWING-PROGRESS', isFetching,userId} as const)
 
 export type ActionsTypes = ReturnType<typeof follow> | ReturnType<typeof unfollow> | ReturnType<typeof setUsers> |
-    ReturnType<typeof setCurrentPage> | ReturnType<typeof setTotalUsersCount>| ReturnType<typeof toggleIsFetching>
+    ReturnType<typeof setCurrentPage> | ReturnType<typeof setTotalUsersCount>| ReturnType<typeof toggleIsFetching> |
+    ReturnType<typeof toggleFollowingProgress>

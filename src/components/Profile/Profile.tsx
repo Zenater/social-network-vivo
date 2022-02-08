@@ -15,28 +15,18 @@ type MyPostsPropsType = {
     setUsersProfile: (profile: string) => void
     // dispatch: (action: ActionsTypes) => void
     // photos: PhotosType
-    userID:number
+    userID: number
 }
 
 export const Profile = (props: ProfileContainerType) => {
-if(!props.profile) {
-    return <Preloader/>
-}
 
-// useEffect(()=> {
-    // let userID = props.userID;
-    // if (!userID) {
-    //     userID = 2;
-    // }
-//     axios.get<any>(`https://social-network.samuraijs.com/api/1.0/profile/` + userID)
-//         .then(responce => {
-//             props.setUsersProfile(responce.data)
-//         });
-// })
+    if (!props.profile) {
+        return <Preloader/>
+    }
 
     return (
         <div>
-            <ProfileInfo profile={props.profile} />
+            <ProfileInfo profile={props.profile}/>
             <Post message={''} likes={0}/>
             {/*<MyPosts post={props.post}*/}
             {/*         // dispatch={props.dispatch.bind(props.message)}*/}
