@@ -25,6 +25,8 @@ export const Users = (props:UsersForUsers) => {
     return <div>
         <div>
             {pages.map(p => {
+
+
                 return <span className={props.currentPage === p ? s.selectedPage : ''}
                              onClick={(e) => props.onPageChanged(p)}>{p}</span>
             })}
@@ -41,8 +43,7 @@ export const Users = (props:UsersForUsers) => {
                             axios.delete<any>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
                                 {withCredentials: true,
                                 headers: {
-                                    'API-KEY': 'fb2ab079-08d1-443f-b919-56e507e1bcd7'
-                                }})
+                                    'API-KEY': 'fb2ab079-08d1-443f-b919-56e507e1bcd7'}})
                                 .then(responce => {
                                     if (responce.data.resultCode === 0) {
                                         props.unfollow(u.id);

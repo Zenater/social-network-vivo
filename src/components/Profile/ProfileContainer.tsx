@@ -79,7 +79,7 @@ const ProfileContainer = (props:ProfileContainerType)=>{
 
     useEffect(()=>{
         let testId = userID || 1
-        axios.get<any>(`https://social-network.samuraijs.com/api/1.0/profile/` + testId)
+        axios.get<any>(`https://social-network.samuraijs.com/api/1.0/profile/`+testId )
             .then(responce => {
                 props.setUsersProfile(responce.data)
             });
