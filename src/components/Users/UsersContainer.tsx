@@ -89,7 +89,6 @@ const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress
-
     }
 }
 

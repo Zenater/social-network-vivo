@@ -81,5 +81,4 @@ export const setUsersProfile = (profile: string) => {
     } as const
 }
 
-
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeTextTypeAC>| ReturnType<typeof setUsersProfile>
