@@ -23,6 +23,7 @@ export const Profile = (props: ProfileContainerType) => {
     if (!props.profile) {
         return <Preloader/>
     }
+
     console.log('profile')
 
     return (

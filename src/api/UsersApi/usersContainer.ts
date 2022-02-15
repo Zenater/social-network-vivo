@@ -9,11 +9,11 @@ export const instance = axios.create({
 })
 
 export const usersContainerApi = {
-    getPages(currentPage:number,pageSize:number) {
+    getPages (currentPage:number,pageSize:number) {
         return  instance.get<any>('page=${currentPage}&count=${pageSize}')
     },
-    getPageNumber(pageNumber:number) {
-        return  instance.get<any>('page=${pageNumber}')
+    getPageNumber (pageNumber:number,pageSize:number) {
+        return  instance.get<any>('page=${pageNumber}&count=${pageSize}')
     }
 }
 

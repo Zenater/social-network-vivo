@@ -1,4 +1,6 @@
 import {PostType} from "./dialogsReducer";
+import {Dispatch} from "redux";
+import {profileApi} from "../api/ProfileApi/profileApi";
 
 let initialStateProfile = {
     messageForNewPost: "",
@@ -15,7 +17,6 @@ export type initialStateProfileType = {
     messageForNewPost: string,
     post: Post[],
     profile: string
-    // photos: PhotosType
     newPostText:string
 }
 
@@ -25,38 +26,26 @@ type Post = {
     likes: number
 }
 
-// photos: PhotosType
-
-
-export type PhotosType = {
-    small: null
-    large: null
-}
-
 export const profileReducer = (state : initialStateProfileType= initialStateProfile, action: ActionsTypes):initialStateProfileType => {
     switch (action.type) {
         case 'ADD-POST': {
             let newPost: PostType = {
                 id: new Date().getTime(),
-                message: action.postText, likes: 0
-            };
+                message: action.postText, likes: 0};
             return {
                 ...state,
                 post: [...state.post, newPost],
-                newPostText: ''
-            };
+                newPostText: ''};
         }
         case 'CHANGE-NEW-TEXT': {
             return {
                 ...state,
-                messageForNewPost: action.newText
-            };
+                messageForNewPost: action.newText};
         }
         case "SET-USER-PROFILE": {
             return {
                 ...state,
-                profile: action.profile
-            };
+                profile: action.profile};
         }
         default:
             return state
@@ -82,3 +71,12 @@ export const setUsersProfile = (profile: string) => {
 }
 
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeTextTypeAC>| ReturnType<typeof setUsersProfile>
+
+export const getUserProfileTC=(userId: number)=> {
+ return (dispatch: Dispatch) => {
+     profileApi.getProfile(userId)
+         .then(responce => {
+             dispatch(setUsersProfile(responce.data))
+         })
+ }
+}

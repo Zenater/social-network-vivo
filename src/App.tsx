@@ -22,7 +22,7 @@ export const App = () => {
                     <Route path='/dialogs' element={<DialogContainer/>}/>
                     <Route path='/profile/:userID' element={<ProfileContainer/>}/>
                     <Route path='/news' element={<News/>}/>
-                    <Route path='/users' element={<UsersContainer/>}/>
+                    <Route path='/users' element={<UsersContainer />}/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/settings' element={<Settings/>}/>
                 </Routes>

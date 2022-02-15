@@ -9,7 +9,7 @@ type ProfileInfoType = {
 }
 // photos: PhotosType
 export const ProfileInfo = (props: ProfileInfoType) => {
-    console.log(props.profile)
+
     if (!props.profile) {
         return <Preloader/>
     }

@@ -9,9 +9,12 @@ export const instance = axios.create({
 })
 
 export const usersApi = {
-    getUnfollow(id:number) {
-        return  instance.get<any>('${u.id}')
+    unfollow(id:number) {
+        return  instance.delete<any>('${id}')
     },
+    follow(id:number) {
+        return instance.post<any>('${id}',{})
+    }
 
 }
 
