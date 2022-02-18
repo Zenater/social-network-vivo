@@ -1,45 +1,42 @@
 import React, {useEffect} from 'react';
 import {Profile} from "./Profile";
-import axios from "axios";
-import {connect} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../redux/storeRedux";
-import {setUsersProfile} from "../../redux/profileReducer";
+import {getUserProfileTC, setUsersProfile} from "../../redux/profileReducer";
 import {useParams} from "react-router-dom";
 
 export type MapStateToPropsTypeProfile = {
     profile: any
-}
-
-type PathParamsType = {
-    // userID: number
+    isAuth: boolean
 }
 
 export type MapDispatchProfile = {
     setUsersProfile: (profile: any) => void
 }
 
-export type Owntype = MapStateToPropsTypeProfile & MapDispatchProfile
-export type ProfileContainerType = PathParamsType & Owntype
+export type ProfileContainerType = MapStateToPropsTypeProfile & MapDispatchProfile
 
 const mapStateToProps = (state: AppRootStateType): MapStateToPropsTypeProfile => {
     return {
-        profile: state.profileReducer.profile
+        profile: state.profileReducer.profile,
+        isAuth: state.auth.isAuth
     }
 }
 
 const ProfileContainer = (props: ProfileContainerType) => {
 
-    let params = useParams<any>();
+    let params = useParams() as {userID: string} ;
+    let dispatch = useDispatch()
 
-    useEffect(() => {
-        axios.get<any>(`https://social-network.samuraijs.com/api/1.0/profile/` + params.userID)
-            .then(responce => {
-                props.setUsersProfile(responce.data)
-            });
+    const {isAuth, login} = useSelector((state:AppRootStateType)=>state.auth)
+
+
+    useEffect(()=> {
+         dispatch(getUserProfileTC(+params.userID))
     }, [])
 
     return (
-        <Profile profile={props.profile} setUsersProfile={props.setUsersProfile}/>
+        <Profile isAuth={isAuth} profile={props.profile} setUsersProfile={props.setUsersProfile}/>
     )
 }
 export default connect<MapStateToPropsTypeProfile, MapDispatchProfile, {}, AppRootStateType>(mapStateToProps,

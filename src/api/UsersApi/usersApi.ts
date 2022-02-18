@@ -1,4 +1,4 @@
-import axios, {AxiosResponse} from "axios";
+import axios from "axios";
 
 export const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/follow/',
@@ -9,9 +9,11 @@ export const instance = axios.create({
 })
 
 export const usersApi = {
-    getUnfollow(id:number) {
-        return  instance.get<any>('${u.id}')
+    unfollow(id:number) {
+        return  instance.delete<any>('${id}')
     },
-
+    follow(id:number) {
+        return instance.post<any>('${id}',{})
+    }
 }
 

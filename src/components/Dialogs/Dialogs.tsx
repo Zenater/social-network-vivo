@@ -3,6 +3,7 @@ import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsType, MessageType} from "../../redux/dialogsReducer";
+import {Navigate}  from 'react-router-dom';
 
 export type DialogsPropsType = {
     dialogs: DialogsType[]
@@ -10,6 +11,7 @@ export type DialogsPropsType = {
     newMessageText: (newMessage: string) =>void
     addMessage: () =>void
     newMessageBody: string
+    isAuth: boolean
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -24,6 +26,9 @@ export const Dialogs = (props: DialogsPropsType) => {
     const onAddMessage=()=>{
         props.addMessage()
     }
+
+    if(!props.isAuth) return <Navigate to="/login"/>
+
 
     return (
         <div className={s.dialogs}>
