@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./User.module.css";
 import userPhoto from "../../assests/img/users.jpg";
-import {followTC, unFollowTC, UsersType} from "../../redux/userReducer";
+import {UsersType} from "../../redux/userReducer";
 import {NavLink} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import axios from "axios";
