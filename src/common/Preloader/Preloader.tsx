@@ -1,10 +1,9 @@
 import React from 'react';
-import loading from "../../assests/img/loading.gif";
-
+import loading from './../../assests/img/loading.gif';
 const Preloader = () => {
     return (
         <div style={{backgroundColor:'white'}}>
-             <img src={loading}/>
+             <img alt={'loading'} src={loading}/>
         </div>
     );
 };

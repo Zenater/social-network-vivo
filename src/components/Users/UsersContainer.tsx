@@ -16,7 +16,6 @@ import {AppRootStateType} from "../../redux/storeRedux";
 import {Users} from "./Users";
 import Preloader from "../../common/Preloader/Preloader";
 
-
 export type MapStateToPropsType = {
     users: UsersType[]
     pageSize: number,

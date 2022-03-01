@@ -25,14 +25,14 @@ const mapStateToProps = (state: AppRootStateType): MapStateToPropsTypeProfile =>
 
 const ProfileContainer = (props: ProfileContainerType) => {
 
-    let params = useParams() as {userID: string} ;
+    let params = useParams() as { userID: string };
     let dispatch = useDispatch()
 
-    const {isAuth, login} = useSelector((state:AppRootStateType)=>state.auth)
+    const {isAuth, login} = useSelector((state: AppRootStateType) => state.auth)
 
 
-    useEffect(()=> {
-         dispatch(getUserProfileTC(+params.userID))
+    useEffect(() => {
+        dispatch(getUserProfileTC(+params.userID))
     }, [])
 
     return (

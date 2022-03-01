@@ -16,12 +16,6 @@ export type DialogsPageType = {
 }
 type SidebarType = {}
 
-export type RootStateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsPageType
-    sidebar?: SidebarType
-}
-
 //////////////////////////////////////////////
 export type MessageType = {
     id: number
@@ -71,7 +65,6 @@ export const dialogsReducer = (state: InitialStateTypeDialogs= initialState, act
             return state
     }
 }
-
 export const sendMessageAC = () => {
     return {
         type: 'SEND-MESSAGE'
@@ -83,6 +76,5 @@ export const updateNewMessageBodyAC = (newText: string) => {
         newText: newText
     } as const
 }
-
 
 export type ActionsTypes = ReturnType<typeof updateNewMessageBodyAC> | ReturnType<typeof sendMessageAC>
