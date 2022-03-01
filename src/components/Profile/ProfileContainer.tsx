@@ -3,9 +3,8 @@ import {Profile} from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/storeRedux";
-import {getUserProfileTC, setUsersProfile} from "../../redux/profileReducer";
+import {setUsersProfile} from "../../redux/profileReducer";
 import {useParams} from "react-router-dom";
-import {profileApi} from "../../api/ProfileApi/profileApi";
 
 export type MapStateToPropsTypeProfile = {
     profile: any

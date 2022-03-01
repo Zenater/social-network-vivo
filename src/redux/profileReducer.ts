@@ -1,6 +1,5 @@
 import {PostType} from "./dialogsReducer";
 import {Dispatch} from "redux";
-import {profileApi} from "../api/ProfileApi/profileApi";
 
 let initialStateProfile = {
     messageForNewPost: "",
@@ -72,11 +71,11 @@ export const setUsersProfile = (profile: string) => {
 
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeTextTypeAC>| ReturnType<typeof setUsersProfile>
 
-export const getUserProfileTC=(userId: number)=> {
- return (dispatch: Dispatch) => {
-     profileApi.getProfile(userId)
-         .then(responce => {
-             dispatch(setUsersProfile(responce.data))
-         })
- }
-}
+// export const getUserProfileTC=(userId: number)=> {
+//  return (dispatch: Dispatch) => {
+//      profileApi.getProfile(userId)
+//          .then(responce => {
+//              dispatch(setUsersProfile(responce.data))
+//          })
+//  }
+// }
