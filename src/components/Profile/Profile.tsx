@@ -1,9 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {MyPosts,} from "./My post/Posts/My posts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {Post} from "./My post/Post/Post";
-import {ProfileContainerType} from "./ProfileContainer";
+import {PostType} from "../../redux/dialogsReducer";
+import {Owntype, ProfileContainerType} from "./ProfileContainer";
+import {PhotosType} from "../../redux/userReducer";
 import Preloader from "../../common/Preloader/Preloader";
-import {Navigate} from "react-router-dom";
+import axios from "axios";
+
+type MyPostsPropsType = {
+    post: Array<PostType>
+    message: string
+    profile: any
+    setUsersProfile: (profile: string) => void
+    // dispatch: (action: ActionsTypes) => void
+    // photos: PhotosType
+    userID: number
+}
 
 export const Profile = (props: ProfileContainerType) => {
 
@@ -11,7 +24,7 @@ export const Profile = (props: ProfileContainerType) => {
         return <Preloader/>
     }
 
-    if(!props.isAuth) return <Navigate to="/login"/>
+    console.log('profile')
 
     return (
         <div>
