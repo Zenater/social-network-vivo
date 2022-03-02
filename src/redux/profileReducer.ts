@@ -10,13 +10,15 @@ let initialStateProfile = {
         {id: 4, message: "Hello everyone", likes: 4}
     ],
     profile:  "",
-    newPostText:""
+    newPostText:"",
+    status: ''
 }
 export type initialStateProfileType = {
     messageForNewPost: string,
     post: Post[],
     profile: string
     newPostText:string
+    status: string
 }
 
 type Post = {
@@ -46,6 +48,12 @@ export const profileReducer = (state : initialStateProfileType= initialStateProf
                 ...state,
                 profile: action.profile};
         }
+        case 'SET-STATUS': {
+            return  {
+                ...state,
+                status:action.status
+            }
+        }
         default:
             return state
     }
@@ -68,8 +76,14 @@ export const setUsersProfile = (profile: string) => {
        profile
     } as const
 }
+export const setStatus = (status:string)=> {
+    return {
+        type : 'SET-STATUS',status
+    } as const
+}
 
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeTextTypeAC>| ReturnType<typeof setUsersProfile>
+export type ActionsTypes = ReturnType<typeof addPostAC> |
+    ReturnType<typeof changeTextTypeAC>| ReturnType<typeof setUsersProfile>| ReturnType<typeof setStatus>
 
 // export const getUserProfileTC=(userId: number)=> {
 //  return (dispatch: Dispatch) => {

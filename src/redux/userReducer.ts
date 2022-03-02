@@ -96,60 +96,45 @@ export type ActionsTypes = ReturnType<typeof follow> | ReturnType<typeof unfollo
     ReturnType<typeof toggleFollowingProgress>
 
 
-export const getUsersTC = (currentPage: number, pageSize: number) => {
-
-    return (dispatch: Dispatch) => {
-        dispatch(toggleIsFetching(true));
-        usersContainerApi.getPages(currentPage, pageSize)
-            .then(responce => {
-                return (dispatch: Dispatch) => {
-                    dispatch(toggleIsFetching(false));
-                    dispatch(setUsers(responce.data.items));
-                    dispatch(setTotalUsersCount(responce.data.totalCount));
-                }
-            })
-    }
+export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFetching(true));
+    usersContainerApi.getPages(currentPage, pageSize)
+        .then((responce) => {
+                dispatch(toggleIsFetching(false));
+                dispatch(setUsers(responce.data.items));
+                dispatch(setTotalUsersCount(responce.data.totalCount));
+            }
+        )
 }
-export const getPageTC = (pageNumber: number, pageSize: number) => {
-
-    return (dispatch: Dispatch) => {
-        dispatch(toggleIsFetching(true));
-        dispatch(setCurrentPage(pageNumber));
-        usersContainerApi.getPageNumber(pageNumber, pageSize)
-            .then(responce => {
-                return (dispatch: Dispatch) => {
-                    dispatch(toggleIsFetching(false));
-                    dispatch(setUsers(responce.data.items));
-                }
-            })
-    }
+export const getPageTC = (pageNumber: number, pageSize: number) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFetching(true));
+    dispatch(setCurrentPage(pageNumber));
+    usersContainerApi.getPageNumber(pageNumber, pageSize)
+        .then((responce) => {
+                dispatch(toggleIsFetching(false));
+                dispatch(setUsers(responce.data.items));
+        })
 }
 // onPageChanged = this.props.getPageTC(this.props.pageNumber,this.props.pageSize)
 
 
-export const unFollowTC = (userId: number) => {
-    return (dispatch: Dispatch) => {
-
-        dispatch(toggleFollowingProgress(true, userId))
-        usersApi.unfollow(userId)
-            .then(responce => {
-                if (responce.data.resultCode === 0) {
-                    dispatch(unfollow(userId));
-                }
-                dispatch(toggleFollowingProgress(false, userId))
-            })
-    }
+export const unFollowTC = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(toggleFollowingProgress(true, userId))
+    usersApi.unfollow(userId)
+        .then((responce) => {
+            if (responce.data.resultCode === 0) {
+                dispatch(unfollow(userId));
+            }
+            dispatch(toggleFollowingProgress(false, userId))
+        })
 }
-export const followTC = (userId: number) => {
-    return (dispatch: Dispatch) => {
-
-        dispatch(toggleFollowingProgress(true, userId))
-        usersApi.follow(userId)
-            .then(responce => {
-                if (responce.data.resultCode === 0) {
-                    dispatch(follow(userId));
-                }
-                dispatch(toggleFollowingProgress(false, userId))
-            })
-    }
+export const followTC = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(toggleFollowingProgress(true, userId))
+    usersApi.follow(userId)
+        .then((responce) => {
+            if (responce.data.resultCode === 0) {
+                dispatch(follow(userId));
+            }
+            dispatch(toggleFollowingProgress(false, userId))
+        })
 }

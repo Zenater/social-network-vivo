@@ -13,7 +13,6 @@ import {AppRootStateType} from "../../redux/storeRedux";
 import {Users} from "./Users";
 import Preloader from "../../common/Preloader/Preloader";
 
-
 export type MapStateToPropsType = {
     users: UsersType[]
     pageSize: number,
@@ -23,20 +22,11 @@ export type MapStateToPropsType = {
     followingInProgress: number[],
 }
 export type MapDispatchToPropsType = {
-    // follow: (userId: number) => void
-    // unfollow: (userId: number) => void
-    // setUsers: (users: Array<UsersType>) => void
-    // setCurrentPage: (currentPage: number) => void
-    // setTotalUsersCount: (totalCount: number) => void
-    // toggleIsFetching: (isFetching: boolean) => void
     toggleFollowingProgress: (isFetching: boolean, userId: number) => void
     getUsersTC: (currentPage: number, pageSize: number) => void
     getPageTC: (pageNumber: number, pageSize: number) => void
     followTC: (userId: number) => void
     unFollowTC: (userId: number) => void
-    // getUsersTC: (currentPage: number,  pageSize: number)=>void
-    // getPageNumber:(pageNumber:number,pageSize:number)=>void
-
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -48,12 +38,13 @@ export type UserLocation = {
 export class UsersComponent extends React.Component<UsersPropsType, {}> {
 
 
+
     componentDidMount() {
-        this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
+       this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getUsersTC(pageNumber, this.props.pageSize)
+       this.props.getPageTC(pageNumber, this.props.pageSize)
     }
 
     render() {
@@ -65,8 +56,6 @@ export class UsersComponent extends React.Component<UsersPropsType, {}> {
                 pageSize={this.props.pageSize}
                 onPageChanged={this.onPageChanged}
                 users={this.props.users}
-                // follow={this.props.follow}
-                // unfollow={this.props.unfollow}
                 followingInProgress={this.props.followingInProgress}
                 toggleFollowingProgress={this.props.toggleFollowingProgress}
                 followTC={this.props.followTC}

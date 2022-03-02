@@ -8,6 +8,7 @@ import {useParams} from "react-router-dom";
 
 export type MapStateToPropsTypeProfile = {
     profile: any
+    status: string
 }
 
 type PathParamsType = {
@@ -23,20 +24,15 @@ export type ProfileContainerType = PathParamsType & Owntype
 
 const mapStateToProps = (state: AppRootStateType): MapStateToPropsTypeProfile => {
     return {
-        profile: state.profileReducer.profile
+        profile: state.profileReducer.profile,
+        status: state.profileReducer.status,
     }
 }
+
 
 const ProfileContainer = (props: ProfileContainerType) => {
 
     let params:any = useParams<any>();
-
-    // getUserProfileTC(params.userId)
-
-    // profileApi.getProfile(params.userId)
-    //     .then(responce => {
-    //         props.setUsersProfile(responce.data)
-    // })
 
     useEffect(() => {
         axios.get<any>(`https://social-network.samuraijs.com/api/1.0/profile/` + params.userID)
@@ -46,7 +42,7 @@ const ProfileContainer = (props: ProfileContainerType) => {
     }, [])
 
     return (
-        <Profile profile={props.profile}  setUsersProfile={setUsersProfile}/>
+        <Profile status={props.status} profile={props.profile}  setUsersProfile={setUsersProfile}/>
     )
 }
 export default connect<MapStateToPropsTypeProfile, MapDispatchProfile, {}, AppRootStateType>(mapStateToProps,
