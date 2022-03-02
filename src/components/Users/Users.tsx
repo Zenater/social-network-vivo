@@ -1,8 +1,9 @@
 import React from 'react';
 import s from "./User.module.css";
 import userPhoto from "../../assests/img/users.jpg";
-import {unFollowTC,followTC, UsersType} from "../../redux/userReducer";
+import {unFollowTC, followTC, UsersType} from "../../redux/userReducer";
 import {NavLink} from "react-router-dom";
+import {useDispatch} from "react-redux";
 
 export type UsersForUsers = {
     totalUsersCount: number,
@@ -14,11 +15,11 @@ export type UsersForUsers = {
     users: UsersType[]
     followingInProgress: number[]
     toggleFollowingProgress: (isFetching: boolean, userId: number) => void
-    // unFollowTC: (userId: number) => void
-    // followTC: (userId: number) => void
+    unFollowTC: (userId: number) => void
+    followTC: (userId: number) => void
 }
 export const Users = (props: UsersForUsers) => {
-
+    const dispatch = useDispatch()
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
     let pages = [];
@@ -44,10 +45,12 @@ export const Users = (props: UsersForUsers) => {
                 <div>
                     {u.followed
                         ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                           unFollowTC(u.id)}}
+                            props.unFollowTC(u.id)
+                        }}
                         >Unfollow </button>
                         : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                           followTC(u.id)}}
+                            props.followTC(u.id)
+                        }}
                         >Follow</button>}
                 </div>
             </span>

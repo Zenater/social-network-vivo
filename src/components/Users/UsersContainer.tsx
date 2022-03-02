@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-    follow,
+    follow, followTC,
     getPageTC,
     getUsersTC,
     setCurrentPage,
     toggleFollowingProgress,
-    unfollow,
+    unfollow, unFollowTC,
     UsersType
 } from "../../redux/userReducer";
 import {connect} from "react-redux";
@@ -30,6 +30,10 @@ export type MapDispatchToPropsType = {
     // setTotalUsersCount: (totalCount: number) => void
     // toggleIsFetching: (isFetching: boolean) => void
     toggleFollowingProgress: (isFetching: boolean, userId: number) => void
+    getUsersTC: (currentPage: number, pageSize: number) => void
+    getPageTC: (pageNumber: number, pageSize: number) => void
+    followTC: (userId: number) => void
+    unFollowTC: (userId: number) => void
     // getUsersTC: (currentPage: number,  pageSize: number)=>void
     // getPageNumber:(pageNumber:number,pageSize:number)=>void
 
@@ -45,14 +49,11 @@ export class UsersComponent extends React.Component<UsersPropsType, {}> {
 
 
     componentDidMount() {
-        getUsersTC(this.props.currentPage, this.props.pageSize)
+        this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
     }
 
-
-
-
     onPageChanged = (pageNumber: number) => {
-        getUsersTC(pageNumber, this.props.pageSize)
+        this.props.getUsersTC(pageNumber, this.props.pageSize)
     }
 
     render() {
@@ -68,7 +69,8 @@ export class UsersComponent extends React.Component<UsersPropsType, {}> {
                 // unfollow={this.props.unfollow}
                 followingInProgress={this.props.followingInProgress}
                 toggleFollowingProgress={this.props.toggleFollowingProgress}
-            />
+                followTC={this.props.followTC}
+                unFollowTC={this.props.unFollowTC}/>
         </>
     }
 }
@@ -84,10 +86,9 @@ const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     }
 }
 
-
 export default connect(mapStateToProps, {
     follow, unfollow, setCurrentPage,
-    toggleFollowingProgress, getUsersTC, getPageTC
+    toggleFollowingProgress, getUsersTC, getPageTC, unFollowTC, followTC,
 })(UsersComponent);
 
 
