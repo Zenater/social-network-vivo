@@ -5,6 +5,8 @@ import ProfileStatus from "../ProfileStatus/ProfileStatus";
 
 type ProfileInfoType = {
     profile: any
+    status: string
+    updateStatus:(status: string)=>void
 }
 
 export const ProfileInfo = (props: ProfileInfoType) => {
@@ -23,7 +25,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                 ava+description
             </div>
             <div>
-                <ProfileStatus status={'Hello everyman'}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     )

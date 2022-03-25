@@ -1,12 +1,9 @@
-import React, {useEffect} from 'react';
-import {MyPosts,} from "./My post/Posts/My posts";
+import React from 'react';
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {Post} from "./My post/Post/Post";
 import {PostType} from "../../redux/dialogsReducer";
-import {Owntype, ProfileContainerType} from "./ProfileContainer";
-import {PhotosType} from "../../redux/userReducer";
+import {ProfileContainerType} from "./ProfileContainer";
 import Preloader from "../../common/Preloader/Preloader";
-import axios from "axios";
 
 type MyPostsPropsType = {
     post: Array<PostType>
@@ -28,7 +25,7 @@ export const Profile = (props: ProfileContainerType) => {
 
     return (
         <div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
             <Post message={''} likes={0}/>
             {/*<MyPosts post={props.post}*/}
             {/*         // dispatch={props.dispatch.bind(props.message)}*/}

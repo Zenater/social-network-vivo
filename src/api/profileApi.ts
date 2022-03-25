@@ -1,23 +1,23 @@
 import axios from "axios";
 
 export const instance = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.0/follow/',
+    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
-        'API-KEY': '51bb63fa-2e05-4617-888c-e9df6d522090'
+        'API-KEY': '214a73ed-48b9-448e-951f-3a7527ae0225'
     },
     withCredentials: true
 })
 
 export const profileApi = {
     getProfile(userId:number) {
-        return  instance.get<any>(`profile/` + userId)
+        return  instance.get(`profile/` + userId)
     },
     getStatus(userId:number) {
-        return instance.get<any>(`status/` + userId)
+        return instance.get(`profile/status/` + userId)
     },
     updateStatus(status:string) {
-        return instance.put(`status`,{status: status})
-    }
+        return instance.put(`profile/status/`,{status})
+    },
 
 }
 
