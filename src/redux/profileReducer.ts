@@ -83,7 +83,6 @@ export const setUsersProfile = (profile: string) => {
 }
 export const setStatus = (status: string) =>({type: 'SET-STATUS', status} as const)
 
-
 export type ActionsTypes = ReturnType<typeof addPostAC> |
     ReturnType<typeof changeTextTypeAC> | ReturnType<typeof setUsersProfile> | ReturnType<typeof setStatus>
 

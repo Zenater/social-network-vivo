@@ -40,7 +40,7 @@ const ProfileContainer = (props: ProfileContainerType) => {
                 props.setUsersProfile(res.data)
                 props.getStatus(res.data)
             });
-    }, [params.userID, props])
+    }, [])
 
     return (
         <Profile status={props.status} profile={props.profile}  setUsersProfile={setUsersProfile}

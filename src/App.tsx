@@ -9,11 +9,9 @@ import UsersContainer from "./components/Users/UsersContainer";
 import {DialogContainer} from "./components/Dialogs/DialogsContainer";
 import {Header} from "./components/Header/Header";
 import ProfileContainer from "./components/Profile/ProfileContainer";
-import Login from "./components/Login/Login";
-
+import Login from "./components/Login/LoginForm";
 
 export const App = () => {
-
     return (
         <div className='app-wrapper'>
             <Header/>
