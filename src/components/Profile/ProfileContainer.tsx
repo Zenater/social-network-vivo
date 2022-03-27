@@ -5,10 +5,13 @@ import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/storeRedux";
 import {getStatus, setUsersProfile, updateStatus} from "../../redux/profileReducer";
 import {useParams} from "react-router-dom";
+import {PostType} from "./My post/Post/Post";
 
 export type MapStateToPropsTypeProfile = {
     profile: any
     status: string
+    post: Array<PostType>
+
 }
 
 type PathParamsType = {
@@ -27,6 +30,7 @@ const mapStateToProps = (state: AppRootStateType): MapStateToPropsTypeProfile =>
     return {
         profile: state.profileReducer.profile,
         status: state.profileReducer.status,
+        post: state.profileReducer.post,
     }
 }
 
@@ -44,8 +48,8 @@ const ProfileContainer = (props: ProfileContainerType) => {
 
     return (
         <Profile status={props.status} profile={props.profile}  setUsersProfile={setUsersProfile}
-                 getStatus={getStatus} updateStatus={updateStatus}/>
+                 getStatus={getStatus} updateStatus={updateStatus} post={props.post}/>
     )
 }
 export default connect<MapStateToPropsTypeProfile, MapDispatchProfile, {}, AppRootStateType>(mapStateToProps,
-    {setUsersProfile,getStatus,updateStatus})(ProfileContainer);
+    {setUsersProfile,getStatus,updateStatus,})(ProfileContainer);

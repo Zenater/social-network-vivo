@@ -11,14 +11,12 @@ let initialStateProfile = {
         {id: 4, message: "Hello everyone", likes: 4}
     ],
     profile: "",
-    newPostText: "",
     status: '',
 }
 export type initialStateProfileType = {
     messageForNewPost: string,
     post: Post[],
     profile: string
-    newPostText: string
     status: string
 }
 
@@ -33,18 +31,11 @@ export const profileReducer = (state: initialStateProfileType = initialStateProf
         case 'ADD-POST': {
             let newPost: PostType = {
                 id: new Date().getTime(),
-                message: action.postText, likes: 0
+                message: action.newPostText, likes: 0
             };
             return {
                 ...state,
                 post: [...state.post, newPost],
-                newPostText: ''
-            };
-        }
-        case 'CHANGE-NEW-TEXT': {
-            return {
-                ...state,
-                messageForNewPost: action.newText
             };
         }
         case "SET-USER-PROFILE": {
@@ -64,17 +55,11 @@ export const profileReducer = (state: initialStateProfileType = initialStateProf
     }
 }
 
-export const addPostAC = (postText: string) => ({
+export const addPostAC = (newPostText:string) => ({
     type: 'ADD-POST',
-    postText: postText
+    newPostText
 }) as const
 
-export const changeTextTypeAC = (newText: string) => {
-    return {
-        type: 'CHANGE-NEW-TEXT',
-        newText: newText
-    } as const
-}
 export const setUsersProfile = (profile: string) => {
     return {
         type: 'SET-USER-PROFILE',
@@ -84,7 +69,7 @@ export const setUsersProfile = (profile: string) => {
 export const setStatus = (status: string) =>({type: 'SET-STATUS', status} as const)
 
 export type ActionsTypes = ReturnType<typeof addPostAC> |
-    ReturnType<typeof changeTextTypeAC> | ReturnType<typeof setUsersProfile> | ReturnType<typeof setStatus>
+ ReturnType<typeof setUsersProfile> | ReturnType<typeof setStatus>
 
 export const getStatus = (userId: number) => (dispatch: Dispatch) => {
     profileApi.getStatus(userId)

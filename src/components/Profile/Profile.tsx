@@ -1,21 +1,20 @@
 import React from 'react';
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {Post} from "./My post/Post/Post";
-import {PostType} from "../../redux/dialogsReducer";
-import {ProfileContainerType} from "./ProfileContainer";
 import Preloader from "../../common/Preloader/Preloader";
+import MyPostsContainer from "./My post/MyPosts/My PostsContainer";
+import {PostType} from "./My post/Post/Post";
 
 type MyPostsPropsType = {
-    post: Array<PostType>
-    message: string
-    profile: any
     setUsersProfile: (profile: string) => void
-    // dispatch: (action: ActionsTypes) => void
-    // photos: PhotosType
-    userID: number
+    updateStatus:(status: string)=>void
+    profile: any
+    status: string
+    getStatus:(userId: number) =>void
+    post: Array<PostType>
+
 }
 
-export const Profile = (props: ProfileContainerType) => {
+export const Profile = (props: MyPostsPropsType) => {
 
     if (!props.profile) {
         return <Preloader/>
@@ -26,11 +25,7 @@ export const Profile = (props: ProfileContainerType) => {
     return (
         <div>
             <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
-            <Post message={''} likes={0}/>
-            {/*<MyPosts post={props.post}*/}
-            {/*         // dispatch={props.dispatch.bind(props.message)}*/}
-            {/*         message={props.message}*/}
-            {/*/>*/}
+            <MyPostsContainer post={props.post} />
         </div>
     )
 }

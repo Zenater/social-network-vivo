@@ -43,11 +43,9 @@ export const userReducer = (state: InitialStateTypeUsers = InitialStateUsers, ac
         case 'FOLLOW': {
             return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: true} : u)}
         }
-            ;
         case 'UNFOLLOW': {
             return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)}
         }
-            ;
         case 'SET-USERS': {
             return {...state, users: action.users}
         }
@@ -95,7 +93,6 @@ export type ActionsTypes = ReturnType<typeof follow> | ReturnType<typeof unfollo
     ReturnType<typeof setCurrentPage> | ReturnType<typeof setTotalUsersCount> | ReturnType<typeof toggleIsFetching> |
     ReturnType<typeof toggleFollowingProgress>
 
-
 export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(true));
     usersContainerApi.getPages(currentPage, pageSize)
@@ -116,7 +113,6 @@ export const getPageTC = (pageNumber: number, pageSize: number) => (dispatch: Di
         })
 }
 // onPageChanged = this.props.getPageTC(this.props.pageNumber,this.props.pageSize)
-
 
 export const unFollowTC = (userId: number) => (dispatch: Dispatch) => {
     dispatch(toggleFollowingProgress(true, userId))
