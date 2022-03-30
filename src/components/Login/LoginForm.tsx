@@ -2,21 +2,27 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../../common/FormsControl/Textarea";
 import {required} from "../../utils/validators";
+import {login} from "../../redux/authReducer";
+import {connect} from "react-redux";
+import {AppRootStateType} from "../../redux/storeRedux";
+import {NavLink} from "react-router-dom";
 
 type FormDataType= {
+    email:string
     login: string
     password: string
     rememberMe: boolean
 }
+
 let LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Login'}  validate={[required]}
-                       component={Input} name={'login'}/>
+                <Field placeholder={'Email'}  validate={[required]}
+                       component={Input} name={'email'}/>
             </div>
             <div>
-                <Field  placeholder={'Password'} validate={[required]}
+                <Field  placeholder={'Password'} validate={[required]} type={'password'}
                         component={Input}
                         name={'password'}/>
             </div>
@@ -31,17 +37,26 @@ let LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
 };
 const LoginReduxForm = reduxForm<FormDataType> ({form: 'login'})(LoginForm)
 
-const Login = () => {
+
+type LoginType = {
+    isAuth: boolean
+}
+
+const Login = (props: any) => {
     const onSubmit= (formData:FormDataType)=> {
-        console.log(formData)
+        props.login(formData.email,formData.password,formData.rememberMe,)
+    }
+    if(props.isAuth) {
+        return <NavLink to={'/profile'}/>
     }
     return (
         <div>
-            <h1>LOGiN</h1>
+            <h1>LOGIN</h1>
             <LoginReduxForm onSubmit={onSubmit}/>
         </div>
     );
 };
-// let LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
 
-export default Login;
+const mapStateToProps = (state:AppRootStateType) :LoginType => ({isAuth: state.auth.isAuth})
+
+export default connect(mapStateToProps,{login}) (Login);

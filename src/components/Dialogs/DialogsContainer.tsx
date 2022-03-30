@@ -1,4 +1,3 @@
-import React from 'react';
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/storeRedux";
 import {Dispatch} from "redux";

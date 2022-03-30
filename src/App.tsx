@@ -10,11 +10,12 @@ import {DialogContainer} from "./components/Dialogs/DialogsContainer";
 import {Header} from "./components/Header/Header";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import Login from "./components/Login/LoginForm";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 export const App = () => {
     return (
         <div className='app-wrapper'>
-            <Header/>
+            <HeaderContainer/>
             <Navbar/>
             <div className={'app-wrapper-content'}>
                 <Routes>

@@ -75,8 +75,7 @@ export const getStatus = (userId: number) => (dispatch: Dispatch) => {
     profileApi.getStatus(userId)
         .then(res => {
             dispatch(setStatus(res.data))
-        }
-        )
+        })
 }
 export const updateStatus = (status: string)=> (dispatch: Dispatch) => {
     profileApi.updateStatus(status)

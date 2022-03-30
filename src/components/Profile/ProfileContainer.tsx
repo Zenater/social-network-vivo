@@ -42,7 +42,7 @@ const ProfileContainer = (props: ProfileContainerType) => {
         axios.get<any>(`https://social-network.samuraijs.com/api/1.0/profile/` + params.userID)
             .then(res => {
                 props.setUsersProfile(res.data)
-                props.getStatus(res.data)
+                props.getStatus(params.userID)
             });
     }, [])
 
