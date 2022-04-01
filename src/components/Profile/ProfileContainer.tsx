@@ -11,7 +11,8 @@ export type MapStateToPropsTypeProfile = {
     profile: any
     status: string
     post: Array<PostType>
-
+    authorizedUserId: null
+    isAuth: boolean
 }
 
 type PathParamsType = {
@@ -31,6 +32,8 @@ const mapStateToProps = (state: AppRootStateType): MapStateToPropsTypeProfile =>
         profile: state.profileReducer.profile,
         status: state.profileReducer.status,
         post: state.profileReducer.post,
+        authorizedUserId:state.auth.userId,
+        isAuth: state.auth.isAuth,
     }
 }
 
@@ -53,3 +56,34 @@ const ProfileContainer = (props: ProfileContainerType) => {
 }
 export default connect<MapStateToPropsTypeProfile, MapDispatchProfile, {}, AppRootStateType>(mapStateToProps,
     {setUsersProfile,getStatus,updateStatus,})(ProfileContainer);
+/*
+const ProfileContainer = (props: ProfileContainerType) => {
+
+    let params:any = useParams<any>();
+
+    useEffect(() => {
+        axios.get<any>(`https://social-network.samuraijs.com/api/1.0/profile/` + params.userID)
+            .then(res => {
+                props.setUsersProfile(res.data)
+                props.getStatus(params.userID)
+            });
+    }, [])*/
+/*
+class ProfileContainer extends React.Component<ProfileContainerType, any> {
+    componentDidMount() {
+        // @ts-ignore
+        let userId = this.props.match.params.userId
+        if (userId) {
+            userId = this.props.authorizedUserId
+        }
+        this.props.setUsersProfile(userId)
+        this.props.getStatus(userId)
+    }
+
+    render() {
+        return (
+            <Profile status={this.props.status} profile={this.props.profile} setUsersProfile={this.setUsersProfile}
+                     getStatus={this.getStatus} updateStatus={this.updateStatus} post={this.props.post}/>
+        )
+    }
+}*/

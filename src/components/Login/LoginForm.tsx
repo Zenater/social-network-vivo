@@ -6,6 +6,7 @@ import {login} from "../../redux/authReducer";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/storeRedux";
 import {NavLink} from "react-router-dom";
+import s from './LoginForm.module.css'
 
 type FormDataType= {
     email:string
@@ -26,6 +27,10 @@ let LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
                         component={Input}
                         name={'password'}/>
             </div>
+                {
+                    props.error&& <div className={s.formSummaryError}> {props.error} </div>
+                }
+
             <div>
                 <Field type="checkbox" component={Input} name={'rememberMe'}/> remember me
             </div>
