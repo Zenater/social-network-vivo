@@ -6,6 +6,7 @@ import {userReducer} from "./userReducer";
 import {authReducer} from "./authReducer";
 import thunk from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
+import appReducer from "./appReducer";
 
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
     auth:authReducer,
     form: formReducer,
+    app: appReducer,
 })
 // непосредственно создаём store
 export const store = createStore(rootReducer,applyMiddleware(thunk));

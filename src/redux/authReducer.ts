@@ -34,7 +34,7 @@ export const setAuthUserData = (userId: null, email: null, login: null,isAuth:bo
     ({type: 'SET-USER-DATA', payload: {userId, email, login,isAuth}
 }) as const
 
-export const getAuthUserData = () => (dispatch: Dispatch)=> {
+export const getAuthUserData = (props: any) => (dispatch: Dispatch)=> {
     authAPI.me()
         .then (res=> {
             if(res.data.resultCode===0) {

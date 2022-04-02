@@ -57,18 +57,6 @@ const ProfileContainer = (props: ProfileContainerType) => {
 export default connect<MapStateToPropsTypeProfile, MapDispatchProfile, {}, AppRootStateType>(mapStateToProps,
     {setUsersProfile,getStatus,updateStatus,})(ProfileContainer);
 /*
-const ProfileContainer = (props: ProfileContainerType) => {
-
-    let params:any = useParams<any>();
-
-    useEffect(() => {
-        axios.get<any>(`https://social-network.samuraijs.com/api/1.0/profile/` + params.userID)
-            .then(res => {
-                props.setUsersProfile(res.data)
-                props.getStatus(params.userID)
-            });
-    }, [])*/
-/*
 class ProfileContainer extends React.Component<ProfileContainerType, any> {
     componentDidMount() {
         // @ts-ignore
@@ -86,4 +74,4 @@ class ProfileContainer extends React.Component<ProfileContainerType, any> {
                      getStatus={this.getStatus} updateStatus={this.updateStatus} post={this.props.post}/>
         )
     }
-}*/
+}*!/*/
