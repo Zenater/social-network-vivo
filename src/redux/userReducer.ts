@@ -93,9 +93,11 @@ export type ActionsTypes = ReturnType<typeof follow> | ReturnType<typeof unfollo
     ReturnType<typeof setCurrentPage> | ReturnType<typeof setTotalUsersCount> | ReturnType<typeof toggleIsFetching> |
     ReturnType<typeof toggleFollowingProgress>
 
-export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+export const requestUsersTC = (page: number, pageSize: number) => (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(true));
-    usersContainerApi.getPages(currentPage, pageSize)
+    dispatch(setCurrentPage(page));
+
+    usersContainerApi.getPages(page, pageSize)
         .then((responce) => {
                 dispatch(toggleIsFetching(false));
                 dispatch(setUsers(responce.data.items));
