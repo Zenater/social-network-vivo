@@ -32,7 +32,6 @@ let LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
                 {
                     props.error&& <div className={s.formSummaryError}> {props.error} </div>
                 }
-
             <div>
                 <Field type="checkbox" component={Input} name={'rememberMe'}/> remember me
             </div>

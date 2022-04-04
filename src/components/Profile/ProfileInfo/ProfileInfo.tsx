@@ -2,6 +2,7 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../../common/Preloader/Preloader";
 import ProfileStatus from "../ProfileStatus/ProfileStatus";
+import {ProfileStatusHooks} from "../ProfileStatus/ProfileStatusHooks";
 
 type ProfileInfoType = {
     profile: any
@@ -25,7 +26,8 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                 ava+description
             </div>
             <div>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                {/*<ProfileStatus status={props.status} updateStatus={props.updateStatus}/>*/}
+                <ProfileStatusHooks status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     )
