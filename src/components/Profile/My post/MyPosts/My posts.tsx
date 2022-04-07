@@ -26,15 +26,16 @@ const AddNewPostForm = (props: any) => {
 
 const MyPostsFormRedux = reduxForm({form: 'ProfileAddNewPostForm'})(AddNewPostForm)
 
-export const MyPosts = (props: MyPostsPropsType) => {
+export const MyPosts = React.memo((props: MyPostsPropsType) => {
 
     let postsElement = props.post.map(p => <Post message={p.message} likes={p.likes}/>)
 
-    const addNewPost = (values:any) => {
+    const addNewPost = (values: any) => {
         props.addPost(values.newPostText)
     }
 
     return (
+
         <div className={s.postsBlock}>
             <h3>My posts</h3>
             <MyPostsFormRedux onSubmit={addNewPost}/>
@@ -43,5 +44,5 @@ export const MyPosts = (props: MyPostsPropsType) => {
             </div>
         </div>
     )
-}
+});
 
