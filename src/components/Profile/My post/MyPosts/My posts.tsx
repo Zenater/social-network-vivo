@@ -35,7 +35,6 @@ export const MyPosts = React.memo((props: MyPostsPropsType) => {
     }
 
     return (
-
         <div className={s.postsBlock}>
             <h3>My posts</h3>
             <MyPostsFormRedux onSubmit={addNewPost}/>
@@ -43,6 +42,7 @@ export const MyPosts = React.memo((props: MyPostsPropsType) => {
                 {postsElement}
             </div>
         </div>
+    // const stringy = x => ''.padStart(x,'10');
     )
 });
 

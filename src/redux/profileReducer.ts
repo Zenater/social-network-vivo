@@ -20,7 +20,7 @@ export type initialStateProfileType = {
     status: string
 }
 
-type Post = {
+export type Post = {
     id: number
     message: string
     likes: number
@@ -50,15 +50,19 @@ export const profileReducer = (state: initialStateProfileType = initialStateProf
                 status: action.status
             }
         }
+        case 'DELETE-POST': {
+        return  {
+            ...state,
+            post: state.post.filter(f=>f.id!=action.postId)
+        }
+        }
         default:
             return state
     }
 }
 
-export const addPostAC = (newPostText:string) => ({
-    type: 'ADD-POST',
-    newPostText
-}) as const
+export const addPostAC = (newPostText:string) => ({type: 'ADD-POST', newPostText}) as const
+export const deletePostAC = (postId:any) => ({type: 'DELETE-POST', postId}) as const
 
 export const setUsersProfile = (profile: string) => {
     return {
@@ -69,7 +73,7 @@ export const setUsersProfile = (profile: string) => {
 export const setStatus = (status: string) =>({type: 'SET-STATUS', status} as const)
 
 export type ActionsTypes = ReturnType<typeof addPostAC> |
- ReturnType<typeof setUsersProfile> | ReturnType<typeof setStatus>
+ ReturnType<typeof setUsersProfile> | ReturnType<typeof setStatus> | ReturnType<typeof deletePostAC >
 
 export const getStatus = (userId: number) => (dispatch: Dispatch) => {
     profileApi.getStatus(userId)
