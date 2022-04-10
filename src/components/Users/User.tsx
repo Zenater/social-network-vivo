@@ -4,36 +4,30 @@ import userPhoto from "../../assests/img/users.jpg";
 import {UsersType} from "../../redux/userReducer";
 import {NavLink} from "react-router-dom";
 import Paginator from "../../common/Paginator/Paginator";
+/*
 
 export type UsersForUsers = {
     totalUsersCount: number,
     pageSize: number,
     currentPage: number,
     onPageChanged: (pageNumber: number) => void
-
     users: UsersType[]
     followingInProgress: number[]
     toggleFollowingProgress: (isFetching: boolean, userId: number) => void
     unFollowTC: (userId: number) => void
     followTC: (userId: number) => void
 }
-export const Users = (props: UsersForUsers) => {
+export const User = (props: UsersForUsers) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
+    let u = props.users
 
-    return <div>
-        <Paginator totalUsersCount={props.totalUsersCount} pageSize={props.pageSize}
-                   currentPage={props.currentPage} onPageChanged={props.onPageChanged}
-                   users={props.users} followingInProgress={props.followingInProgress}
-                   toggleFollowingProgress={props.toggleFollowingProgress} unFollowTC={props.unFollowTC}
-                   followTC={props.followTC}/>
-
-            {
-                props.users.map(u => <div key={u.id}>
+    return (
+        <div>
             <span>
                 <div>
                     <NavLink to={'/profile/' + u.id}>
@@ -55,18 +49,18 @@ export const Users = (props: UsersForUsers) => {
                         >Follow</button>}
                 </div>
             </span>
-                        <span>
+            <span>
                 <span>
                     <div>{u.fullName}</div>
                     <div>{u.status}</div>
                 </span>
             </span>
-                        <span>
+                <span>
                     <div>{'u.location.country'}</div>
                     <div>{'u.location.city'}</div>
                 </span>
-                    </div>
-                )
-            }
-    </div>
-};
+        </div>
+    )
+)
+}
+*/

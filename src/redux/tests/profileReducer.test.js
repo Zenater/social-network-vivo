@@ -38,3 +38,4 @@ test('after deleting  length should be decrement',()=> {
     //3 rxpect
     expect(newState.post.length).toBe(3);
 })
+uth

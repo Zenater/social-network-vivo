@@ -75,17 +75,14 @@ export const setStatus = (status: string) =>({type: 'SET-STATUS', status} as con
 export type ActionsTypes = ReturnType<typeof addPostAC> |
  ReturnType<typeof setUsersProfile> | ReturnType<typeof setStatus> | ReturnType<typeof deletePostAC >
 
-export const getStatus = (userId: number) => (dispatch: Dispatch) => {
-    profileApi.getStatus(userId)
-        .then(res => {
+export const getStatus = (userId: number) => async(dispatch: Dispatch) => {
+    let res = await profileApi.getStatus(userId)
             dispatch(setStatus(res.data))
-        })
 }
-export const updateStatus = (status: string)=> (dispatch: Dispatch) => {
-    profileApi.updateStatus(status)
-        .then(res=> {
+export const updateStatus = (status: string)=>async (dispatch: Dispatch) => {
+    let res = await profileApi.updateStatus(status)
             if (res.data.resultCode === 0) {
                 dispatch(setStatus(status))
             }
-        });
+
 }

@@ -58,6 +58,5 @@ export class App extends React.Component<AppClType, {}> {
     }
 }
 
-
 export default compose(connect(mapStateToProps, {initializeApp})(App));
 
