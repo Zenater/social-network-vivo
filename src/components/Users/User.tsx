@@ -3,7 +3,6 @@ import s from "./User.module.css";
 import userPhoto from "../../assests/img/users.jpg";
 import {UsersType} from "../../redux/userReducer";
 import {NavLink} from "react-router-dom";
-import Paginator from "../../common/Paginator/Paginator";
 /*
 
 export type UsersForUsers = {

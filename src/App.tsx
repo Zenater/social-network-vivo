@@ -22,12 +22,13 @@ type MapStateToPropsApp = {
 export type AppClType = MapStateToPropsApp & MapDispatchToPropsApp;
 // & MapDispatchToPropsType
 export type MapDispatchToPropsApp = {
-    initializeApp: () =>void
+    initializeApp: () => void
 }
 
-const mapStateToProps = (state: AppRootStateType): MapStateToPropsApp  => ({
+const mapStateToProps = (state: AppRootStateType): MapStateToPropsApp => ({
     initialized: state.app.initialized
 })
+
 export class App extends React.Component<AppClType, {}> {
 
     componentDidMount() {
@@ -35,25 +36,27 @@ export class App extends React.Component<AppClType, {}> {
     }
 
     render() {
-  /*      if(this.props.initialized) {
-            return <Preloader/>
-        }*/
+        /*      if(this.props.initialized) {
+                  return <Preloader/>
+              }*/
         return (
-            <div className='app-wrapper'>
-                <HeaderContainer/>
-                <Navbar/>
-                <div className={'app-wrapper-content'}>
-                    <Routes>
-                        <Route path='/dialogs' element={<DialogContainer/>}/>
-                        <Route path='/profile/:userID' element={<ProfileContainer/>}/>
-                        <Route path='/news' element={<News/>}/>
-                        <Route path='/users' element={<UsersContainer/>}/>
-                        <Route path='/music' element={<Music/>}/>
-                        <Route path='/settings' element={<Settings/>}/>
-                        <Route path='/login' element={<Login/>}/>
-                    </Routes>
+            <React.Suspense fallback={<Preloader/>}>
+                <div className='app-wrapper'>
+                    <HeaderContainer/>
+                    <Navbar/>
+                    <div className={'app-wrapper-content'}>
+                        <Routes>
+                            <Route path='/dialogs' element={<DialogContainer/>}/>
+                            <Route path='/profile/:userID' element={<ProfileContainer/>}/>
+                            <Route path='/news' element={<News/>}/>
+                            <Route path='/users' element={<UsersContainer/>}/>
+                            <Route path='/music' element={<Music/>}/>
+                            <Route path='/settings' element={<Settings/>}/>
+                            <Route path='/login' element={<Login/>}/>
+                        </Routes>
+                    </div>
                 </div>
-            </div>
+            </React.Suspense>
         );
     }
 }

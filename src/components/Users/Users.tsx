@@ -3,14 +3,13 @@ import s from "./User.module.css";
 import userPhoto from "../../assests/img/users.jpg";
 import {UsersType} from "../../redux/userReducer";
 import {NavLink} from "react-router-dom";
-import Paginator from "../../common/Paginator/Paginator";
+import {Paginator} from "../../common/Paginator/Paginator";
 
 export type UsersForUsers = {
     totalUsersCount: number,
     pageSize: number,
     currentPage: number,
     onPageChanged: (pageNumber: number) => void
-
     users: UsersType[]
     followingInProgress: number[]
     toggleFollowingProgress: (isFetching: boolean, userId: number) => void
@@ -26,12 +25,8 @@ export const Users = (props: UsersForUsers) => {
     }
 
     return <div>
-        <Paginator totalUsersCount={props.totalUsersCount} pageSize={props.pageSize}
-                   currentPage={props.currentPage} onPageChanged={props.onPageChanged}
-                   users={props.users} followingInProgress={props.followingInProgress}
-                   toggleFollowingProgress={props.toggleFollowingProgress} unFollowTC={props.unFollowTC}
-                   followTC={props.followTC}/>
-
+        <Paginator totalItemsCount={props.totalUsersCount} pageSize={props.pageSize}
+                   currentPage={props.currentPage} onPageChanged={props.onPageChanged} />
             {
                 props.users.map(u => <div key={u.id}>
             <span>
