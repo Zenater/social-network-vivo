@@ -42,7 +42,6 @@ export const MyPosts = React.memo((props: MyPostsPropsType) => {
                 {postsElement}
             </div>
         </div>
-    // const stringy = x => ''.padStart(x,'10');
     )
 });
 

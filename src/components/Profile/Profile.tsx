@@ -6,11 +6,12 @@ import {PostType} from "./My post/Post/Post";
 
 type MyPostsPropsType = {
     setUsersProfile: (profile: string) => void
-    updateStatus:(status: string)=>void
+    updateStatus: (status: string) => void
     profile: any
     status: string
-    getStatus:(userId: number) =>void
+    getStatus: (userId: number) => void
     post: Array<PostType>
+    savePhoto: (file: any) => void
 
 }
 
@@ -20,12 +21,13 @@ export const Profile = (props: MyPostsPropsType) => {
         return <Preloader/>
     }
 
-    console.log('profile')
-
     return (
         <div>
-            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
-            <MyPostsContainer post={props.post} />
+            <ProfileInfo savePhoto={props.savePhoto}
+                         profile={props.profile}
+                         status={props.status}
+                         updateStatus={props.updateStatus}/>
+            <MyPostsContainer post={props.post}/>
         </div>
     )
 }
