@@ -8,6 +8,7 @@ import {Textarea} from "../../../../common/FormsControl/Textarea";
 type MyPostsPropsType = {
     post: Array<PostType>
     addPost: (newPostText:string) =>void
+    id?: number
 }
 
 const maxLenght10 = maxLengthCreator(10);
@@ -28,7 +29,7 @@ const MyPostsFormRedux = reduxForm({form: 'ProfileAddNewPostForm'})(AddNewPostFo
 
 export const MyPosts = React.memo((props: MyPostsPropsType) => {
 
-    let postsElement = props.post.map(p => <Post message={p.message} likes={p.likes}/>)
+    let postsElement =[...props.post].reverse().map(p =><Post key={p.id} message={p.message} likes={p.likes}/>)
 
     const addNewPost = (values: any) => {
         props.addPost(values.newPostText)

@@ -39,12 +39,10 @@ export const Users = (props: UsersForUsers) => {
                 <div>
                     {u.followed
                         ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                            console.log('1')
                             props.unFollowTC(u.id)
                         }}
                         >Unfollow </button>
                         : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                            console.log(u)
                             props.followTC(u.id)
                         }}
                         >Follow</button>}

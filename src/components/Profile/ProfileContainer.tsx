@@ -1,9 +1,16 @@
 import React, {useEffect} from 'react';
 import {Profile} from "./Profile";
 import axios from "axios";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import {AppRootStateType} from "../../redux/storeRedux";
-import {getStatus, savePhoto, setUsersProfile, updateStatus} from "../../redux/profileReducer";
+import {
+    getProfileUser,
+    getStatus,
+    savePhoto,
+    saveProfile,
+    setUsersProfile,
+    updateStatus
+} from "../../redux/profileReducer";
 import {useParams} from "react-router-dom";
 import {PostType} from "./My post/Post/Post";
 
@@ -19,46 +26,55 @@ type PathParamsType = {
     // userID: number
 }
 
-export type MapDispatchProfile = {
-    setUsersProfile: (profile: any) => void
-    updateStatus:(status: string)=>void
-        getStatus:(userId: number) =>void
-    savePhoto: (file:any)=>void
+type MapDispatchProfileType = {
+    // setUsersProfile: (profile: any) => void
+    getProfileUser: (userId: number) =>void
+    updateStatus: (status: string) => void
+    getStatus: (userId: number) => void
+    savePhoto: (file: any) => void
+    saveProfile:(profile:any)=> void
 }
-export type Owntype = MapStateToPropsTypeProfile & MapDispatchProfile
-export type ProfileContainerType = PathParamsType & Owntype
+type Owntype = MapStateToPropsTypeProfile & MapDispatchProfileType
+type ProfileContainerType = PathParamsType & Owntype
 
 const mapStateToProps = (state: AppRootStateType): MapStateToPropsTypeProfile => {
     return {
         profile: state.profileReducer.profile,
         status: state.profileReducer.status,
         post: state.profileReducer.post,
-        authorizedUserId:state.auth.userId,
+        authorizedUserId: state.auth.userId,
         isAuth: state.auth.isAuth,
     }
 }
 
 const ProfileContainer = (props: ProfileContainerType) => {
 
-    let params:any = useParams<any>();
-
+    let params: any = useParams<any>();
+    // const status = useSelector<AppRootStateType,string>(state => state.profileReducer.status)
     useEffect(() => {
-        axios.get<any>(`https://social-network.samuraijs.com/api/1.0/profile/` + params.userID)
+        let userId = params.userID
+        if (!userId) {
+            userId = props.authorizedUserId;
+        }
+
+        axios.get<any>(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(res => {
-                props.setUsersProfile(res.data)
-                props.getStatus(params.userID)
+                props.getProfileUser(userId)
+                props.getStatus(userId)
             });
-    }, [])
+    }, [props.authorizedUserId,props.status])
+
 
     return (
-        <Profile status={props.status} profile={props.profile}  setUsersProfile={setUsersProfile}
-                 getStatus={getStatus} updateStatus={updateStatus} post={props.post}
-                 savePhoto={savePhoto}
+        <Profile status={props.status} profile={props.profile} getProfileUser={props.getProfileUser}
+                 getStatus={props.getStatus} updateStatus={props.updateStatus} post={props.post}
+                 savePhoto={props.savePhoto} saveProfile={props.saveProfile}
+
         />
     )
 }
-export default connect<MapStateToPropsTypeProfile, MapDispatchProfile, {}, AppRootStateType>(mapStateToProps,
-    {setUsersProfile,getStatus,updateStatus,savePhoto,})(ProfileContainer);
+export default connect<MapStateToPropsTypeProfile, MapDispatchProfileType, {}, AppRootStateType>(mapStateToProps,
+    {getProfileUser, getStatus, updateStatus, savePhoto,saveProfile})(ProfileContainer);
 /*
 class ProfileContainer extends React.Component<ProfileContainerType, any> {
     componentDidMount() {

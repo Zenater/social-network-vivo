@@ -5,6 +5,7 @@ import s from './Post.module.css';
 export type PostType = {
     message: string
     likes: number
+    id?: number
 }
 
 export const Post =(props: PostType)=> {

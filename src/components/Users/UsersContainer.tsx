@@ -45,8 +45,6 @@ export type UserLocation = {
 
 export class UsersComponent extends React.Component<UsersPropsType, {}> {
 
-
-
     componentDidMount() {
        this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
     }
