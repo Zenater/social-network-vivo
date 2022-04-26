@@ -1,4 +1,5 @@
 import axios from "axios";
+import {ProfileType} from "../components/Profile/ProfileInfo/ProfileDataForm";
 
 export const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -20,7 +21,7 @@ export const profileApi = {
             return res.data
         })
     },
-    savePhoto ( photoFile:any) {
+    savePhoto ( photoFile:File) {
         const formData= new FormData();
         formData.append('image',photoFile)
         return instance.put(`profile/photo`,formData, {
@@ -29,7 +30,7 @@ export const profileApi = {
             }
         })
     },
-    saveProfile(profile:any) {
+    saveProfile(profile:ProfileType) {
         return instance.put(`profile`, profile );
     }
 }
@@ -43,6 +44,7 @@ export const authAPI = {
     logout() {
         return instance.delete(`auth/login`)
     }
+
 }
 
 

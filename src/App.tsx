@@ -36,9 +36,9 @@ export class App extends React.Component<AppClType, {}> {
     }
 
     render() {
-        /*      if(this.props.initialized) {
+              if(!this.props.initialized) {
                   return <Preloader/>
-              }*/
+              }
         return (
             <React.Suspense fallback={<Preloader/>}>
                 <div className='app-wrapper'>
@@ -62,5 +62,6 @@ export class App extends React.Component<AppClType, {}> {
     }
 }
 
-export default compose(connect(mapStateToProps, {initializeApp})(App));
-
+// export default compose<React.ComponentType>(connect(mapStateToProps, {initializeApp})(App));
+export let AppContainer = compose<React.ComponentType>(
+    connect(mapStateToProps, {initializeApp}))(App)

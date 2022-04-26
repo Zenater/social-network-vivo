@@ -1,12 +1,13 @@
 import React from 'react';
 import {
-    follow, followTC,
+    follow,
+    followTC,
     getPageTC,
     requestUsersTC,
     setCurrentPage,
     toggleFollowingProgress,
-    unfollow, unFollowTC,
-    UsersType
+    unfollow,
+    unFollowTC
 } from "../../redux/userReducer";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/storeRedux";
@@ -21,14 +22,8 @@ import {
     getUsers
 } from "../../redux/usersSelectors";
 
-export type MapStateToPropsType = {
-    users: UsersType[]
-    pageSize: number,
-    totalUsersCount: number,
-    currentPage: number,
-    isFetching: boolean,
-    followingInProgress: number[],
-}
+export type MapStateUsersType = ReturnType<typeof mapStateToProps>
+
 export type MapDispatchToPropsType = {
     toggleFollowingProgress: (isFetching: boolean, userId: number) => void
     getUsersTC: (currentPage: number, pageSize: number) => void
@@ -36,7 +31,7 @@ export type MapDispatchToPropsType = {
     followTC: (userId: number) => void
     unFollowTC: (userId: number) => void
 }
-export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
+export type UsersPropsType = MapStateUsersType & MapDispatchToPropsType
 
 export type UserLocation = {
     city: string
@@ -70,17 +65,7 @@ export class UsersComponent extends React.Component<UsersPropsType, {}> {
     }
 }
 
-/*const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
-    return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
-    }
-}*/
-const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
+const mapStateToProps = (state: AppRootStateType) => {
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
@@ -92,33 +77,7 @@ const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
 }
 
 export default connect(mapStateToProps, {
-    follow, unfollow, setCurrentPage,
-    toggleFollowingProgress, getUsersTC: requestUsersTC, getPageTC, unFollowTC, followTC,
+    follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsersTC: requestUsersTC, getPageTC, unFollowTC, followTC,
 })(UsersComponent);
 
-
-/*
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-    return {
-        follow: (userId: number) => {
-            dispatch(followAC(userId))
-        },
-        unfollow: (userId: number) => {
-            dispatch(unfollowAC(userId))
-        },
-        setUsers: (users: Array<UsersType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-        toggleIsFetchingAC: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
-    }
-}
-*/
 
