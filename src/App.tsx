@@ -8,19 +8,18 @@ import {Settings} from "./components/Settings/Settings";
 import UsersContainer from "./components/Users/UsersContainer";
 import {DialogContainer} from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
-import Login from "./components/Login/LoginForm";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer";
 import {AppRootStateType} from "./redux/storeRedux";
 import Preloader from "./common/Preloader/Preloader";
+import { Login } from './components/Login/LoginForm';
 
 type MapStateToPropsApp = {
     initialized: boolean
 }
 export type AppClType = MapStateToPropsApp & MapDispatchToPropsApp;
-// & MapDispatchToPropsType
 export type MapDispatchToPropsApp = {
     initializeApp: () => void
 }
@@ -62,6 +61,5 @@ export class App extends React.Component<AppClType, {}> {
     }
 }
 
-// export default compose<React.ComponentType>(connect(mapStateToProps, {initializeApp})(App));
 export let AppContainer = compose<React.ComponentType>(
     connect(mapStateToProps, {initializeApp}))(App)

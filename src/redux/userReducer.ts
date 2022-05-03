@@ -38,7 +38,7 @@ let InitialStateUsers: InitialStateTypeUsers = {
     followingInProgress: [],
 }
 
-export const userReducer = (state: InitialStateTypeUsers = InitialStateUsers, action: ActionsTypes): InitialStateTypeUsers => {
+export const userReducer = (state: InitialStateTypeUsers = InitialStateUsers, action: UsersActionType): InitialStateTypeUsers => {
     switch (action.type) {
         case 'FOLLOW':
             return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: true} : u)}
@@ -88,7 +88,7 @@ export const toggleIsFetching = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETC
 export const toggleFollowingProgress = (isFetching: boolean, userId: number) =>
     ({type: 'TOGGLE-IS-FOLLOWING-PROGRESS', isFetching, userId} as const)
 
-export type ActionsTypes = ReturnType<typeof follow> | ReturnType<typeof unfollow> | ReturnType<typeof setUsers> |
+export type UsersActionType = ReturnType<typeof follow> | ReturnType<typeof unfollow> | ReturnType<typeof setUsers> |
     ReturnType<typeof setCurrentPage> | ReturnType<typeof setTotalUsersCount> | ReturnType<typeof toggleIsFetching> |
     ReturnType<typeof toggleFollowingProgress>
 

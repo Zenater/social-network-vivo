@@ -44,25 +44,5 @@ export const Paginator = ({totalItemsCount, pageSize,  onPageChanged = x => x,cu
     { portionCount > portionNumber &&
     <button onClick={() => { setPortionNumber(portionNumber + 1) }}>NEXT</button> }
 </div>
-        // <div className={s.paginator}>
-        //     {
-        //         portionNumber > 1 &&
-        //         <button onClick={() => {setPortionNumber(portionNumber - 1)}}>PREV</button>}
-        //     {pages
-        //         .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
-        //         .map((p) => <span className={s.selectedPage}
-        //                           key={p}
-        //                           onClick={(e) => {
-        //                               onPageChanged(p);
-        //                           }}>{p}</span>)
-        //     }
-        //     {
-        //         portionCount > portionNumber &&
-        //         <button onClick={() => {
-        //             setPortionNumber(portionNumber + 1)
-        //         }
-        //         }>NEXT</button>
-        //     }
-        // </div>
     )
 };

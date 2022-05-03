@@ -7,7 +7,6 @@ import {getProfileUser, getStatus, savePhoto, saveProfile, updateStatus} from ".
 import {useParams} from "react-router-dom";
 import {ProfileType} from "./ProfileInfo/ProfileDataForm";
 
-
 type MapPropsType = ReturnType<typeof mapStateToProps>
 
 type MapDispatchProfileType = {
