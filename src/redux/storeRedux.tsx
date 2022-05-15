@@ -1,4 +1,4 @@
-import {Action, applyMiddleware, combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import {ProfileActionsTypes, profileReducer} from "./profileReducer";
 import {dialogsReducer} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
 export const store = createStore(rootReducer,applyMiddleware(thunk));
 // определить автоматически тип всего объекта состояния
 export type AppRootStateType = ReturnType<typeof rootReducer>
-//
+//type of all Actions
 export type AppActionType = ProfileActionsTypes | UsersActionType | AuthActionsTypes | AppReducerActionsTypes
 
 // type all thunk

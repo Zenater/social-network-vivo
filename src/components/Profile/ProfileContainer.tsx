@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {Profile} from "./Profile";
 import axios from "axios";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import {AppRootStateType} from "../../redux/storeRedux";
 import {getProfileUser, getStatus, savePhoto, saveProfile, updateStatus} from "../../redux/profileReducer";
-import {useParams} from "react-router-dom";
+import {Navigate, useLocation, useParams} from "react-router-dom";
 import {ProfileType} from "./ProfileInfo/ProfileDataForm";
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
@@ -29,6 +29,7 @@ const mapStateToProps = (state: AppRootStateType) => {
 }
 
 const ProfileContainer = (props: ProfileContainerType) => {
+    const isAuth = useSelector<AppRootStateType,boolean>(state => state.auth.isAuth)
 
     let params: any = useParams<any>();
     let isOwner=params.userID
@@ -43,8 +44,11 @@ const ProfileContainer = (props: ProfileContainerType) => {
                 props.getProfileUser(userId)
                 props.getStatus(userId)
             });
-    }, [props.authorizedUserId,props.status])
+    }, [params.userID, props.authorizedUserId, props.status,])
 
+    // if(!isAuth) {
+    //     return <Navigate to={'/'} />
+    // }
 
     return (
         <Profile status={props.status} profile={props.profile} getProfileUser={props.getProfileUser}

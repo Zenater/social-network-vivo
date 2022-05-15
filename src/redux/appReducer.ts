@@ -3,7 +3,6 @@ import {AppThunkType} from "./storeRedux";
 
 export type initialStateAppType = typeof initialStateApp;
 
-
 const initialStateApp = {
     initialized: false,
     globalError: null

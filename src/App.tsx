@@ -53,6 +53,7 @@ export class App extends React.Component<AppClType, {}> {
                             <Route path='/music' element={<Music/>}/>
                             <Route path='/settings' element={<Settings/>}/>
                             <Route path='/login' element={<Login/>}/>
+                            <Route path='/' element={<ProfileContainer />}/>
                         </Routes>
                     </div>
                 </div>

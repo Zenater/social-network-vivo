@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import {ProfileType} from "../components/Profile/ProfileInfo/ProfileDataForm";
 
 export const instance = axios.create({
@@ -38,17 +38,32 @@ export const authAPI = {
     me() {
         return instance.get(`auth/me`);
     },
-    login(email: string,password: string,rememberMe=false,captcha:null | string = null) {
-        return instance.post(`auth/login`, {email,password,rememberMe,captcha})
+    // login(email: string,password: string,rememberMe=false,captcha:null | string = null) {
+    //     return instance.post(`auth/login`, {email,password,rememberMe,captcha})
+    // },
+    login(data:LoginParamsType) {
+        return instance.post<LoginParamsType, AxiosResponse<ResponseType <{userId: number}>>>(`auth/login`, data)
     },
     logout() {
-        return instance.delete(`auth/login`)
+        return instance.delete<ResponseType>(`/auth/login`);
     },
 }
 export const securityAPI = {
     getCaptchaUrl() {
         return instance.get(`security/get-captcha-url`);
     }
+}
+export type LoginParamsType = {
+    email: string
+    password: string
+    rememberMe?: boolean
+    captcha?: string
+}
+export type ResponseType<D = {}> = {
+    resultCode: number
+    messages: Array<string>
+    fieldsErrors: Array<string>
+    data: D
 }
 
 

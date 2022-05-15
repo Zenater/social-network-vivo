@@ -34,4 +34,4 @@ export const createField=(placeholder: string | undefined, name: any, validators
         /> {text}
     </div>
 }
-export type GetStringKeys<T> = Extract<keyof T, string>
+// export type GetStringKeys<T> = Extract<keyof T, string>

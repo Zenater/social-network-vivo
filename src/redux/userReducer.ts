@@ -3,7 +3,6 @@ import {usersContainerApi} from "../api/UsersApi/usersContainer";
 import {Dispatch} from "redux";
 import {usersApi} from "../api/UsersApi/usersApi";
 
-
 export type UsersType = {
     id: number,
     photoUrl: string
@@ -12,7 +11,6 @@ export type UsersType = {
     location: UserLocation
     fullName: string
     photos: PhotosType
-
 }
 export type PhotosType = {
     small: string | undefined
@@ -26,10 +24,8 @@ export type InitialStateTypeUsers = {
     currentPage: number
     isFetching: boolean
     followingInProgress: number[]
-    // toggleFollowingProgress:(isFetching: boolean,userId: number)=>void
-
 }
-let InitialStateUsers: InitialStateTypeUsers = {
+const InitialStateUsers: InitialStateTypeUsers = {
     users: [],
     pageSize: 10,
     totalCount: 0,

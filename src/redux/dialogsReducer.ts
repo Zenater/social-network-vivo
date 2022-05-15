@@ -4,19 +4,13 @@ export type PostType = {
     message: string
     likes: number
 }
-export type ProfilePageType = {
-    post: Array<PostType>
-    messageForNewPost: string
-}
 
 export type DialogsPageType = {
     dialogs: DialogsType[]
     messages: MessageType[]
     newMessageBody:string
 }
-type SidebarType = {}
 
-//////////////////////////////////////////////
 export type MessageType = {
     id: number
     message: string
@@ -27,7 +21,7 @@ export type DialogsType = {
     name: string
 }
 
-let initialState = {
+const initialState = {
     dialogs: [
         {id: 1, name: 'Valera'},
         {id: 2, name: 'Sveta'},
@@ -46,13 +40,12 @@ export type InitialStateTypeDialogs = typeof initialState
 
 export const dialogsReducer = (state: InitialStateTypeDialogs= initialState, action: ActionsTypes):InitialStateTypeDialogs => {
     switch (action.type) {
-        case 'SEND-MESSAGE': {
+        case 'SEND-MESSAGE':
             let body = action.newMessageBody;
             return {
                 ...state,
                 messages: [...state.messages, {id: 7, message: body}]
             };
-        }
         default:
             return state
     }

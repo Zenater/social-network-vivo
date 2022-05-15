@@ -26,9 +26,9 @@ export const Users = (props: UsersForUsers) => {
 
     return <div>
         <Paginator totalItemsCount={props.totalUsersCount} pageSize={props.pageSize}
-                   currentPage={props.currentPage} onPageChanged={props.onPageChanged} />
-            {
-                props.users.map(u => <div key={u.id}>
+                   currentPage={props.currentPage} onPageChanged={props.onPageChanged}/>
+        {
+            props.users.map(u => <div key={u.id}>
             <span>
                 <div>
                     <NavLink to={'/profile/' + u.id}>
@@ -48,18 +48,16 @@ export const Users = (props: UsersForUsers) => {
                         >Follow</button>}
                 </div>
             </span>
-                        <span>
-                <span>
+                    <span>
                     <div>{u.fullName}</div>
                     <div>{u.status}</div>
                 </span>
-            </span>
-                        <span>
+                    <span>
                     <div>{'u.location.country'}</div>
                     <div>{'u.location.city'}</div>
                 </span>
-                    </div>
-                )
-            }
+                </div>
+            )
+        }
     </div>
 };

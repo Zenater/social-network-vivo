@@ -1,8 +1,6 @@
-import {Dispatch} from "redux";
-import {authAPI, securityAPI} from "../api/profileApi";
+import {authAPI, LoginParamsType, securityAPI} from "../api/profileApi";
 import {stopSubmit} from "redux-form";
-import {AppRootStateType, AppThunkType} from "./storeRedux";
-import {ThunkAction} from "redux-thunk";
+import {AppThunkType} from "./storeRedux";
 
 
 export type initialStateAuthType = typeof initialStateAuth;
@@ -43,16 +41,15 @@ export const getAuthUserData = ():AppThunkType => async dispatch => {
         dispatch(setAuthUserData(id, email, login, true))
     }
 }
-export const login = (email: string, password: string, rememberMe: boolean,captcha:string):AppThunkType => async dispatch => {
-    let res = await authAPI.login(email, password, rememberMe,captcha)
+export const login = (data: LoginParamsType):AppThunkType => async dispatch => {
+    let res = await authAPI.login(data)
     if (res.data.resultCode === 0) {
         await dispatch(getAuthUserData())
     } else {
         if (res.data.resultCode === 10) {
             await dispatch(getCaptchaUrl());
         }
-        let messageError = res.data.messages.lenght > 0 ? res.data.messages[0] : 'Some error'
-        // @ts-ignore
+        let messageError = res.data.messages.length > 0 ? res.data.messages[0] : 'Some error'
         dispatch(stopSubmit('login', {_error: messageError}))
     }
 }

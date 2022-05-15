@@ -14,7 +14,6 @@ type MapStateToPropsType = {
     isAuth: boolean
 }
  type MapDispatchToPropsType = {
-
      logout: ()=> void
 }
 
