@@ -30,22 +30,13 @@ export const profileReducer = (state = initialStateProfile, action: ProfileActio
                 id: new Date().getTime(),
                 message: action.newPostText, likes: 0
             };
-            return {
-                ...state,
-                post: [...state.post, newPost],
-            };
+            return {...state, post: [...state.post, newPost],};
         case "SET-USER-PROFILE":
-            return {
-                ...state, profile: action.profile
-            };
+            return {...state, profile: action.profile};
         case 'SET-STATUS':
-            return {
-                ...state, status: action.status
-            }
+            return {...state, status: action.status}
         case 'DELETE-POST':
-            return {
-                ...state, post: state.post.filter(f => f.id !== action.postId)
-            }
+            return {...state, post: state.post.filter(f => f.id !== action.postId)}
         case "SAVE-PHOTO-SUCCESS" :
             return {...state, profile: {...state.profile, photo: action.photo} as ProfileType}
         default:

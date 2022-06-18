@@ -1,22 +1,37 @@
-import axios from "axios";
+import axios, {AxiosResponse} from 'axios'
+import {UsersType} from "../../redux/userReducer";
+import {ResponseType} from "../profileApi";
 
 export const instance = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.0/follow/',
+    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
-        'API-KEY': '7033dea1-0869-4acf-9d67-9fc0079eedb9'
+        'API-KEY': 'da18ad3d-33e5-4c2b-a1fb-df29c881a332'
     },
     withCredentials: true
 })
 
 export const usersApi = {
-    unfollow(id:number) {
-        return  instance.delete<any>(`${id}`)
+    unfollow(userId: number) {
+        return instance.delete<ResponseType>(`follow/${userId}`)
     },
-    follow(id:number) {
-        return instance.post<any>(`${id}`)
-    }
-
+    follow(userId: number) {
+        return instance.post<{ userId: string }, AxiosResponse<ResponseType>>(`follow/${userId}`)
+    },
+    getPages(currentPage: number = 1, pageSize: number = 10) {
+        return instance.get<ResponseUsersPages>(`users?page=${currentPage}&count=${pageSize}`)
+    },
+    getPageNumber(pageNumber: number, pageSize: number) {
+        return instance.get<{items: Array<UsersType>}>(`users?page=${pageNumber}&count=${pageSize}`)
+    },
 }
+
+export type ResponseUsersPages = {
+    items: Array<UsersType>
+    totalCount: number
+    error?: string | null
+}
+
+
 
 
 

@@ -1,8 +1,6 @@
 import {authAPI, LoginParamsType, securityAPI} from "../api/profileApi";
 import {stopSubmit} from "redux-form";
 import {AppThunkType} from "./storeRedux";
-
-
 export type initialStateAuthType = typeof initialStateAuth;
 
 const initialStateAuth = {
@@ -12,7 +10,6 @@ const initialStateAuth = {
     isAuth: false,
     captchaUrl: null as string | null
 }
-
 export type AuthActionsTypes = ReturnType<typeof setAuthUserData>| ReturnType<typeof getCaptchaUrlSuccess>
 
 export const authReducer = (state: initialStateAuthType = initialStateAuth, action: AuthActionsTypes): initialStateAuthType => {
@@ -37,7 +34,7 @@ export const getCaptchaUrlSuccess = (captchaUrl:string) => ({
 export const getAuthUserData = ():AppThunkType => async dispatch => {
     let res = await authAPI.me()
     if (res.data.resultCode === 0) {
-        let {id, login, email} = res.data.data;
+        let {id,email, login } = res.data.data;
         dispatch(setAuthUserData(id, email, login, true))
     }
 }

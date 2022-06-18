@@ -1,5 +1,4 @@
 import {UserLocation} from "../components/Users/UsersContainer";
-import {usersContainerApi} from "../api/UsersApi/usersContainer";
 import {Dispatch} from "redux";
 import {usersApi} from "../api/UsersApi/usersApi";
 
@@ -16,67 +15,39 @@ export type PhotosType = {
     small: string | undefined
     large: string | undefined
 }
-
-export type InitialStateTypeUsers = {
-    users: Array<UsersType>
-    totalCount: number
-    pageSize: number
-    currentPage: number
-    isFetching: boolean
-    followingInProgress: number[]
-}
-const InitialStateUsers: InitialStateTypeUsers = {
-    users: [],
+const InitialStateUsers  = {
+    users: [] as Array<UsersType>,
     pageSize: 10,
     totalCount: 0,
     currentPage: 1,
     isFetching: true,
-    followingInProgress: [],
+    followingInProgress: [] as number[],
 }
+export type InitialStateTypeUsers = typeof InitialStateUsers
 
 export const userReducer = (state: InitialStateTypeUsers = InitialStateUsers, action: UsersActionType): InitialStateTypeUsers => {
     switch (action.type) {
         case 'FOLLOW':
             return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: true} : u)}
-
         case 'UNFOLLOW':
             return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)}
-
         case 'SET-USERS':
             return {...state, users: action.users}
-
         case 'SET-CURREN-PAGE':
             return {...state, currentPage: action.currentPage}
-
         case "SET-TOTAL-USERS-COUNT":
             return {...state, totalCount: action.totalCount}
-
         case "TOGGLE-IS-FETCHING":
             return {...state, isFetching: action.isFetching}
-
         case "TOGGLE-IS-FOLLOWING-PROGRESS":
-            return {
-                ...state,
-                followingInProgress: action.isFetching
-                    ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id !== action.userId)
-            }
+            return {...state, followingInProgress: action.isFetching ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)}
         default:
             return state
     }
 }
-
-export const follow = (userId: number) => ({
-    type: 'FOLLOW',
-    userId: userId
-}) as const
-
-export const unfollow = (userId: number) => {
-    return {
-        type: 'UNFOLLOW',
-        userId: userId
-    } as const
-}
+export const follow = (userId: number) => ({type: 'FOLLOW', userId: userId}) as const
+export const unfollow = (userId: number) => ({type: 'UNFOLLOW', userId: userId}) as const
 export const setUsers = (users: Array<UsersType>) => ({type: 'SET-USERS', users} as const)
 export const setCurrentPage = (currentPage: number) => ({type: 'SET-CURREN-PAGE', currentPage} as const)
 export const setTotalUsersCount = (totalCount: number) => ({type: 'SET-TOTAL-USERS-COUNT', totalCount} as const)
@@ -91,7 +62,7 @@ export type UsersActionType = ReturnType<typeof follow> | ReturnType<typeof unfo
 export const requestUsersTC = (page: number, pageSize: number) => async (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(true));
     dispatch(setCurrentPage(page));
-    let data = await usersContainerApi.getPages(page, pageSize)
+    let data = await usersApi.getPages(page, pageSize)
     dispatch(toggleIsFetching(false));
     dispatch(setUsers(data.data.items));
     dispatch(setTotalUsersCount(data.data.totalCount));
@@ -99,7 +70,7 @@ export const requestUsersTC = (page: number, pageSize: number) => async (dispatc
 export const getPageTC = (pageNumber: number, pageSize: number) => async (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(true));
     dispatch(setCurrentPage(pageNumber));
-    let res = await usersContainerApi.getPageNumber(pageNumber, pageSize)
+    let res = await usersApi.getPageNumber(pageNumber, pageSize)
     dispatch(toggleIsFetching(false));
     dispatch(setUsers(res.data.items));
 }

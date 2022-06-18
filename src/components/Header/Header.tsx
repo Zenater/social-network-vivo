@@ -1,11 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import s from './Header.module.css';
 import {NavLink} from 'react-router-dom';
-import axios from "axios";
-import {setAuthUserData} from "../../redux/authReducer";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../redux/storeRedux";
-import {MapStateToPropsTypeHeaderContainer} from "./HeaderContainer";
 
 type MapStateToPropsType = {
     // userId: null
@@ -16,9 +11,7 @@ type MapStateToPropsType = {
  type MapDispatchToPropsType = {
      logout: ()=> void
 }
-
 export type HeaderPropsType = MapStateToPropsType & MapDispatchToPropsType
-
 
 export  const Header = (props:HeaderPropsType) => {
     return (
