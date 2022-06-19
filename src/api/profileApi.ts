@@ -4,7 +4,7 @@ import {ProfileType} from "../components/Profile/ProfileInfo/ProfileDataForm";
 export const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
-        'API-KEY': 'da18ad3d-33e5-4c2b-a1fb-df29c881a332'
+        'API-KEY': 'cff3bb95-e12e-44ee-af6b-c60d34e9686a'
     },
     withCredentials: true
 })
