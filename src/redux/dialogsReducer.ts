@@ -1,3 +1,4 @@
+import { v1 } from "uuid"
 
 export type PostType = {
     id: number
@@ -12,28 +13,30 @@ export type DialogsPageType = {
 }
 
 export type MessageType = {
-    id: number
+    id: string
     message: string
 }
 
 export type DialogsType = {
-    id: number
+    id: string
     name: string
+    image:string
 }
 
 const initialState = {
     dialogs: [
-        {id: 1, name: 'Valera'},
-        {id: 2, name: 'Sveta'},
-        {id: 3, name: 'Jon'},
-        {id: 4, name: 'Victor'},
-        {id: 5, name: 'Oleg'},
-        {id: 6, name: 'Igor'}
+        {id: v1(), name: 'Valera',image: 'https://iqonic.design/themes/socialv/html/images/user/05.jpg'},
+        {id: v1(), name: 'Sveta',image: 'https://iqonic.design/themes/socialv/html/images/user/07.jpg'},
+        {id: v1(), name: 'Jon',image: 'https://iqonic.design/themes/socialv/html/images/user/09.jpg'},
+        {id: v1(), name: 'Victor',image: 'https://iqonic.design/themes/socialv/html/images/user/08.jpg'},
+        {id: v1(), name: 'Oleg',image: 'https://iqonic.design/themes/socialv/html/images/user/06.jpg'},
     ] as Array<DialogsType>,
     messages: [
-        {id: 1, message: 'Yo'},
-        {id: 2, message: 'Hi'},
-        {id: 3, message: 'i tried'}
+        {id: v1(), message: 'What are you doing?'},
+        {id: v1(), message: 'There is the house where my family lives.'},
+        {id: v1(), message: 'i tried'},
+        {id: v1(), message: 'We go jogging every Sunday!'},
+        {id: v1(), message: 'They didn’t go to school last year.'}
     ] as Array<MessageType>,
 }
 export type InitialStateTypeDialogs = typeof initialState
@@ -44,7 +47,7 @@ export const dialogsReducer = (state: InitialStateTypeDialogs= initialState, act
             let body = action.newMessageBody;
             return {
                 ...state,
-                messages: [...state.messages, {id: 7, message: body}]
+                messages: [...state.messages, {id: v1(), message: body}]
             };
         default:
             return state

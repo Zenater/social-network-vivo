@@ -7,6 +7,7 @@ import {AuthActionsTypes, authReducer} from "./authReducer";
 import thunk, {ThunkAction} from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
 import appReducer, {AppReducerActionsTypes} from "./appReducer";
+import {navBarPageReducer} from "./navBarPage-reducer";
 
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
     auth:authReducer,
     form: formReducer,
     app: appReducer,
+    navBarPage: navBarPageReducer,
 })
 // непосредственно создаём store
 export const store = createStore(rootReducer,applyMiddleware(thunk));

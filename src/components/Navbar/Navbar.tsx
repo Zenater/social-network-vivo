@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './Navbar.module.css';
-
+import Friends from "./Friends";
 
 export const Navbar = () => {
     return (
@@ -38,6 +38,7 @@ export const Navbar = () => {
                 >Users</NavLink>
             </div>
             </ul>
+            <Friends/>
         </nav>
     )
 }

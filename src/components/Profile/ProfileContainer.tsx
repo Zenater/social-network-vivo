@@ -54,8 +54,7 @@ const ProfileContainer = (props: ProfileContainerType) => {
         <Profile status={props.status} profile={props.profile} getProfileUser={props.getProfileUser}
                  getStatus={props.getStatus} updateStatus={props.updateStatus} post={props.post}
                  savePhoto={props.savePhoto} saveProfile={props.saveProfile}
-                 isOwner={!isOwner}
-        />
+                 isOwner={!isOwner}/>
     )
 }
 

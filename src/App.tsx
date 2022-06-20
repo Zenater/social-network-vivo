@@ -47,7 +47,7 @@ export class App extends React.Component<AppClType, {}> {
                     <div className={app.container}>
                         <Navbar/>
                         {/*<div className={'app-wrapper-content'}>*/}
-                        <div className={app.container}>
+                        <div className={app.content}>
                             <Routes>
                                 <Route path='/dialogs' element={<DialogContainer/>}/>
                                 <Route path='/profile/' element={<ProfileContainer/>}/>

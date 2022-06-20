@@ -1,14 +1,11 @@
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/storeRedux";
 import {Dispatch} from "redux";
-import {Dialogs} from "./Dialogs";
-import {DialogsType, MessageType, sendMessageAC} from "../../redux/dialogsReducer";
+import {Dialogs, DialogsPropsType} from "./Dialogs";
+import {sendMessageAC} from "../../redux/dialogsReducer";
 
-export type MapStateToPropsType = {
-    dialogs: DialogsType[],
-    messages: MessageType[],
-    isAuth: boolean
-}
+export type MapStateToPropsType =  Omit<DialogsPropsType,'sendMessage'>
+
 export type MapDispatchToPropsType = {
     sendMessage: (newMessageBody:string) => void
 }

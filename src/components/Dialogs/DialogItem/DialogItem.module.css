@@ -1,27 +1,68 @@
+/*.dialogs {*/
+/*    display: grid;*/
+/*    grid-template-columns: 2fr 10fr;*/
+/*}*/
+/*!*.dialogsItems .active {*/
+/*    color: gold;*/
+/*}*!*/
+/*.dialogsItems {*/
+/*    padding: 10px;*/
+/*    color: white;*/
+/*}*/
+/*!**/
+/*.dialog {*/
+/*    padding: 10px;*/
+/*}*!*/
+/*.messages {*/
+/*    padding: 10px;*/
+/*}*/
+/*.messages .message{*/
+/*    color: white;*/
+/*}*/
+/*.message {*/
+/*}*/
+.dialogs__wrapper {
+    display: flex;
+}
+
+.dialog__list {
+    margin: 0;
+    padding: 10px;
+    list-style: none;
+}
+
+.dialog__item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    border-bottom: 1px solid #f1f1f1;
+    border-radius: 15px;
+}
+
 .dialogs {
-    display: grid;
-    grid-template-columns: 2fr 10fr;
+    width: 30%;
 }
 
-/*.dialogsItems .active {
-    color: gold;
-}*/
-.dialogsItems {
-    padding: 10px;
-    color: white;
-}
-/*
-.dialog {
-    padding: 10px;
-}*/
-
-.messages {
-    padding: 10px;
-}
-.messages .message{
-    color: white;
+.dialog__item.active {
+    color: crimson;
 }
 
-.message {
+.link {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    margin: 0px;
+    line-height: 1.5;
+    color: #3f414d;
+    text-decoration: none;
+    cursor: pointer;
+}
 
+.img {
+    border-radius: 5px;
+    display: block;
+    height: 50px;
+    width: 50px;
+    margin-right: 20px;
 }
