@@ -5,3 +5,7 @@
 .selectedPage {
     font-weight: bold;
 }
+.wrapper {
+    background-color: #3f414d;
+    padding: 10px;
+}

@@ -37,20 +37,15 @@ export const ProfileInfo = ({profile, status, updateStatus, savePhoto, isOwner, 
             });
     }
     return (
-        // <div className={s.descriptionBlock}>
         <div className={s.descriptionBlock}>
-            {/*<div className={p.content__img}>*/}
             <div className={p.info}>
                 <img className={p.ava__img} src={profile.photos.small || userPhoto}/>
                 <ProfileStatus status={status} updateStatus={updateStatus}/>
                 <p className={p.name}>{profile.fullName}</p>
                 <p className={p.status}>{profile.lookingForAJobDescription}</p>
                 <div className={p.editPhoto}>
-                    {
-                        isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>
-                    }
+                    {isOwner && <input type={"file"} onChange={onMainPhotoSelected} className={p.uploadInput}/>}
                 </div>
-                {/*</div>*/}
             </div>
             <div className={p.editMode}>
                 {editMode
@@ -66,21 +61,6 @@ export const ProfileInfo = ({profile, status, updateStatus, savePhoto, isOwner, 
             </div>
         </div>
     )
-    //     <div className={s.descriptionBlock}>
-    //         <img src={profile.photos.large || userPhoto } className={s.img}/>
-    //         {
-    //             isOwner && <input type={"file"} onChange={onMainPhotoSelected} />
-    //             }
-    //         { editMode
-    //             ? <ProfileDataForm initialValues={profile} profile={profile} onSubmit={onSubmit}/>
-    //             : <ProfileData goToEditMode={() => {setEditMode(true)} } profile={profile} isOwner={isOwner}/> }
-    //     </div>
-    //     <div>
-    //         <ProfileStatus status={status} updateStatus={updateStatus}/>
-    //         {/*<ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>*/}
-    //     </div>
-    // </div>
-
 }
 
 type ProfileDataPropsType = {
@@ -110,8 +90,7 @@ const ProfileData = ({profile, isOwner, goToEditMode}: ProfileDataPropsType) => 
         <div>
             <b>Contacts</b>: {
             Object.keys(profile.contacts)
-                .map((key) => {
-                    return <Contact key={key} contactTitle={key}
+                .map((key) => {return <Contact key={key} contactTitle={key}
                                     contactValue={profile.contacts[key as keyof ContactsType]}/>
                 })}
         </div>
@@ -134,24 +113,5 @@ export type ContactsType = {
 }
 const Contact: React.FC<ContactsPropsType> = ({contactTitle, contactValue}) => {
     return <div className={s.contact}><b>{contactTitle}</b>: {contactValue}</div>
-}
-{/*            <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {*/
-}
-{/*            return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>*/
-}
-{/*        })}*/
-}
-{/*        </div>*/
-}
-{/*    </div>*/
-}
-{/*}*/
-}
-
-{/*const Contact = ({contactTitle, contactValue}:any) => {*/
-}
-{/*    return <div className={s.contact}><b>{contactTitle}</b>: {contactValue}</div>*/
-}
-{/*}*/
 }
 

@@ -24,7 +24,7 @@ export const Users = (props: UsersForUsers) => {
         pages.push(i);
     }
 
-    return <div>
+    return <div className={s.wrapper}>
         <Paginator totalItemsCount={props.totalUsersCount} pageSize={props.pageSize}
                    currentPage={props.currentPage} onPageChanged={props.onPageChanged}/>
         {

@@ -1,32 +1,7 @@
-/*.dialogs {*/
-/*    display: grid;*/
-/*    grid-template-columns: 2fr 10fr;*/
-/*}*/
 
-/*!*.dialogsItems .active {*/
-/*    color: gold;*/
-/*}*!*/
-/*.dialogsItems {*/
-/*    padding: 10px;*/
-/*    color: white;*/
-/*}*/
-/*!**/
-/*.dialog {*/
-/*    padding: 10px;*/
-/*}*!*/
-
-/*.messages {*/
-/*    padding: 10px;*/
-/*}*/
-/*.messages .message{*/
-/*    color: white;*/
-/*}*/
-
-/*.message {*/
-
-/*}*/
 .dialogs__wrapper {
     display: flex;
+    background-color: green;
 }
 
 .dialog__list,
@@ -45,7 +20,7 @@
 
 .messages {
     border-radius: 5px;
-    box-shadow: 0px 0px 20px 0px rgba(44, 101, 144, 0.1);
+    box-shadow: 0 0 20px 0 rgba(44, 101, 144, 0.1);
     background-image: url("https://iqonic.design/themes/socialv/html/images/page-img/100.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -63,9 +38,8 @@
 .textarea {
     height: 45px;
     line-height: 45px;
-    padding: 5px;
     margin-top: 10px;
-    padding-left: 15px;
+    padding: 5px 5px 5px 15px;
     background: transparent;
     border: 1px solid #f1f1f1;
     font-size: 14px;
@@ -82,8 +56,7 @@
     color: #fff;
     font-size: 14px;
     line-height: 20px;
-    padding: 0.5rem;
-    padding-left: 2rem;
+    padding: 0.5rem 0.5rem 0.5rem 2rem;
     font-weight: bold;
     border-radius: 5px;
     outline: none;
@@ -98,4 +71,23 @@
     width: 20px;
     height: 20px;
     left: 5px;
+}
+.message__item {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.text {
+    padding: .75rem 1rem;
+    margin: 0 1.33rem 1.33rem .3rem;
+    clear: both;
+    word-break: break-word;
+    color: white;
+    background: #50b5ff;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px 0 rgb(80, 181, 255);
 }

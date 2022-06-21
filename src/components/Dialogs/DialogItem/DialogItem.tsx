@@ -16,7 +16,6 @@ export const DialogItem = (props: DialogItemPropsType) => {
                 <img src={props.image} alt={'ava'} className={dialogs.img}/>
                 <NavLink to={path} className={dialogs.link}>{props.name}</NavLink>
             </li>
-            {/*<NavLink to={path}>{props.name}</NavLink>*/}
         </div>
     )
 }

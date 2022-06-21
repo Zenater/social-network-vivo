@@ -42,11 +42,9 @@ export class App extends React.Component<AppClType, {}> {
         return (
             <React.Suspense fallback={<Preloader/>}>
                 <div className={app.app}>
-                    {/*<div className='app-wrapper'>*/}
                     <HeaderContainer/>
                     <div className={app.container}>
                         <Navbar/>
-                        {/*<div className={'app-wrapper-content'}>*/}
                         <div className={app.content}>
                             <Routes>
                                 <Route path='/dialogs' element={<DialogContainer/>}/>

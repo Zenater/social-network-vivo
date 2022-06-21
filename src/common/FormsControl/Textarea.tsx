@@ -16,13 +16,15 @@ const FormControl = ({input, meta, child, ...props}: any) => {
 
 export const Textarea = (props: any) => {
     const {input, meta, child, ...restProps} = props
-    return <FormControl {...props}><textarea {...input} {...restProps}/></FormControl>
+    return <FormControl {...props}><textarea {...input} {...restProps}
+                                             className={s.textarea}
+    /></FormControl>
 
 };
 
 export const Input = (props: any) => {
     const {input, meta, child, ...restProps} = props
-    return <FormControl {...props}><input {...input} {...restProps}/></FormControl>
+    return <FormControl {...props}><input {...input} {...restProps} className={s.input}/></FormControl>
 };
 
 export const createField=(placeholder: string | undefined, name: any, validators: any, component: any, props = {}, text = "")=> {
