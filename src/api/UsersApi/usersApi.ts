@@ -5,7 +5,7 @@ import {ResponseType} from "../profileApi";
 export const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
-        'API-KEY': 'da18ad3d-33e5-4c2b-a1fb-df29c881a332'
+        'API-KEY': '6d59b228-89cd-4bce-bacb-27157b2efcfe'
     },
     withCredentials: true
 })

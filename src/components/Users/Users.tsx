@@ -1,63 +1,33 @@
 import React from 'react';
-import s from "./User.module.css";
-import userPhoto from "../../assests/img/users.jpg";
+import urs from "./Users.module.css";
 import {UsersType} from "../../redux/userReducer";
-import {NavLink} from "react-router-dom";
 import {Paginator} from "../../common/Paginator/Paginator";
+import {User} from "./User";
 
-export type UsersForUsers = {
-    totalUsersCount: number,
-    pageSize: number,
-    currentPage: number,
-    onPageChanged: (pageNumber: number) => void
+type UsersFuncPropsType = {
     users: UsersType[]
-    followingInProgress: number[]
-    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
-    unFollowTC: (userId: number) => void
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
     followTC: (userId: number) => void
+    unFollowTC: (userId: number) => void
+    onPageChanged: (pageNumber: number) => void
+    followingInProgress: Array<number>
+    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
 }
-export const Users = (props: UsersForUsers) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+export const Users = (props: UsersFuncPropsType) => {
 
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
-
-    return <div className={s.wrapper}>
-        <Paginator totalItemsCount={props.totalUsersCount} pageSize={props.pageSize}
-                   currentPage={props.currentPage} onPageChanged={props.onPageChanged}/>
-        {
-            props.users.map(u => <div key={u.id}>
-            <span>
-                <div>
-                    <NavLink to={'/profile/' + u.id}>
-                        <img alt={''} src={u.photos.small != null ? u.photos.small : userPhoto}
-                             className={s.userPhoto}/>
-                    </NavLink>
-                </div>
-                <div>
-                    {u.followed
-                        ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                            props.unFollowTC(u.id)
-                        }}
-                        >Unfollow </button>
-                        : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                            props.followTC(u.id)
-                        }}
-                        >Follow</button>}
-                </div>
-            </span>
-                    <span>
-                    <div>{u.fullName}</div>
-                    <div>{u.status}</div>
-                </span>
-                    <span>
-                    <div>{'u.location.country'}</div>
-                    <div>{'u.location.city'}</div>
-                </span>
-                </div>
-            )
-        }
-    </div>
+    return (
+    <div className={urs.box_wrap}>
+                <div className={urs.box}>
+                    {props.users.map(user => {
+                        return <User followingInProgress={props.followingInProgress} followTC={props.followTC}
+                                     unFollowTC={props.unFollowTC} user={user} key={user.id}/>
+                    })
+                    }
+                <Paginator totalItemsCount={props.totalUsersCount} pageSize={props.pageSize}
+                           currentPage={props.currentPage} onPageChanged={props.onPageChanged}/>
+            </div>
+        </div>
+    )
 };

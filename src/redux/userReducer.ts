@@ -6,7 +6,7 @@ export type UsersType = {
     id: number,
     photoUrl: string
     followed: boolean
-    status: string
+    status: string | null
     location: UserLocation
     fullName: string
     photos: PhotosType
@@ -32,7 +32,7 @@ export const userReducer = (state: InitialStateTypeUsers = InitialStateUsers, ac
         case 'UNFOLLOW':
             return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)}
         case 'SET-USERS':
-            return {...state, users: action.users}
+            return {...state, users: [...action.users]}
         case 'SET-CURREN-PAGE':
             return {...state, currentPage: action.currentPage}
         case "SET-TOTAL-USERS-COUNT":

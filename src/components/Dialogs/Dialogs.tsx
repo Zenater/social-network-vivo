@@ -42,11 +42,11 @@ export const Dialogs = (props: DialogsPropsType) => {
 }
 const maxLenght10 = maxLengthCreator(50);
 
-const AddMessageForm = (props: any) => {
+const DialogsFormData = (props: any) => {
     return (
         <form className={dialogs.box} onSubmit={props.handleSubmit}>
             <Field placeholder={'Enter you message'} component={Textarea} name={'newMessageBody'}
-                   validate={[required, maxLenght10]}
+                   validate={[required, maxLenght10]}  className={dialogs.textarea}
             />
             <div>
                 <button className={dialogs.btn}>send</button>
@@ -54,5 +54,5 @@ const AddMessageForm = (props: any) => {
         </form>
     )
 }
-const AddMessageFormRedux = reduxForm({form: 'dialogAddMessageForm'})(AddMessageForm)
+const AddMessageFormRedux = reduxForm({form: 'dialogAddMessageForm'})(DialogsFormData)
 
