@@ -1,11 +1,9 @@
-import React, {ChangeEventHandler, DetailedHTMLProps, InputHTMLAttributes, useState} from 'react';
+import React, {useState} from 'react';
 import s from './ProfileInfo.module.css';
 import p from './ProfileInfo.module.css';
 import Preloader from "../../../common/Preloader/Preloader";
-import {ProfileStatusHooks} from "../ProfileStatus/ProfileStatusHooks";
 import userPhoto from "../../../assests/img/users.jpg";
 import ProfileStatus from "../ProfileStatus/ProfileStatus";
-import {saveProfile} from "../../../redux/profileReducer";
 import ProfileDataForm, {ProfileType} from "./ProfileDataForm";
 import SocialLink from "./SocialLink/SocialLink";
 import Analytics from "./Analitics/Analitics";

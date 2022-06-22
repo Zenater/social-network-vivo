@@ -2,7 +2,6 @@ import React from 'react';
 import {createField, Input, Textarea} from "../../../common/FormsControl/Textarea";
 import {reduxForm} from "redux-form";
 import s from './../../Login/LoginForm.module.css'
-import a from './ProfileInfo.module.css';
 
 type PropsType = {
     profile: ProfileType
