@@ -30,7 +30,7 @@ export const profileReducer = (state = initialStateProfile, action: ProfileActio
             let newPost: PostType = {
                 id: new Date().getTime(),
                 message: action.newPostText, likes: 0,
-                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbNslP7-_P7jz5MrT5yhW14y_IzBDbZZT0ag&usqp=CAU'
+                image: 'https://s0.tchkcdn.com/g-5cqe7rwlvCnWfmdnS2-WBA/1/366296/660x480/f/0/422_8mile.jpg'
 
             };
             return {...state, post: [...state.post, newPost],};

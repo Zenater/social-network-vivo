@@ -7,7 +7,6 @@ import {NavLink} from "react-router-dom";
 
 export type UsersForUsers = {
     user: UsersType
-    // toggleFollowingProgress: (isFetching: boolean, userId: number) => void
     unFollowTC: (userId: number) => void
     followTC: (userId: number) => void
     followingInProgress: Array<number>

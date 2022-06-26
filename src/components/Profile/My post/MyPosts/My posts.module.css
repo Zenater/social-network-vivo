@@ -3,7 +3,22 @@
     align-items: center;
     margin-bottom: 30px;
 }
+.new {
+    display: flex;
+    align-items: center;
+    padding: 30px 20px;
+    margin-bottom: 20px;
+    background: #bdbd3e;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px 0px rgb(44 101 144 / 10%);
 
+}
+.img {
+    width: 60px;
+    border-radius: 50%;
+    margin-right: 20px;
+    box-shadow: 0px 0px 20px 0px rgb(44 101 144 / 10%);
+}
 .add__btn {
     border: none;
     outline: none;
@@ -54,7 +69,8 @@
     background: #ffffff;
     border-radius: 5px;
     margin-bottom: 15px;
-    box-shadow: 0 0 20px 0 rgba(44, 101, 144, 0.1);
+    box-shadow: 0px 0px 20px 0px rgba(44, 101, 144, 0.1);
+
 }
 
 .ava {

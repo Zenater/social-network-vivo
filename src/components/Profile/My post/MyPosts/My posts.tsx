@@ -1,14 +1,19 @@
 import React from 'react';
 import s from './My posts.module.css';
 import {Post, PostType} from "../Post/Post";
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../../utils/validators";
 import {Textarea} from "../../../../common/FormsControl/Textarea";
+import {AddMessageFormRedux} from "../../../Dialogs/Dialogs";
+import p from "../../ProfileInfo/ProfileInfo.module.css";
+import userPhoto from "../../../../assests/img/users.jpg";
+import {ProfileType} from "../../ProfileInfo/ProfileDataForm";
 
 type MyPostsPropsType = {
     post: Array<PostType>
     addPost: (newPostText: string) => void
     id?: number
+    profile: ProfileType
 }
 
 const maxLength10 = maxLengthCreator(10);
@@ -23,30 +28,34 @@ export const MyPosts = React.memo((props: MyPostsPropsType) => {
         props.addPost(values.newPostText)
     }
 
-    return (
+    return(
         <div>
             <div className={s.post}>
                 <p className={s.title}>Create Post</p>
-                <MyPostsFormRedux onSubmit={addNewPost}/>
+            <MyPostsFormRedux onSubmit={addNewPost}/>
+            </div>
+            <div>
                 {postsElement}
             </div>
-        </div>
+         </div>
     )
 });
-const AddNewPostForm = (props: any) => {
+type FormDataType = {
+    newPostContent: string
+}
+
+const AddNewPostForm:React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
-        <form className={s.wrap} onSubmit={props.handleSubmit}>
-            <img className={s.ava} src='https://iqonic.design/themes/socialv/html/images/user/1.jpg'/>
-            {/*<div className={s.textarea1}>*/}
+            <form className={s.wrap} onSubmit={props.handleSubmit}>
+                <img className={s.ava} src='https://iqonic.design/themes/socialv/html/images/user/1.jpg'/>
                 <Field  component={Textarea} name='newPostContent' placeholder="Write something here..."
-                       validate={[required, maxLength10]}
+                        validate={[required, maxLength10]}
                 />
                 <button className={s.add__btn}>Add post</button>
-            {/*</div>*/}
-
-        </form>
+            </form>
     )
 }
-const MyPostsFormRedux = reduxForm({form: 'ProfileAddNewPostForm'})(AddNewPostForm)
+
+const MyPostsFormRedux = reduxForm<FormDataType>({form: 'newPostContent'})(AddNewPostForm)
 
 

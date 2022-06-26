@@ -54,5 +54,5 @@ const DialogsFormData = (props: any) => {
         </form>
     )
 }
-const AddMessageFormRedux = reduxForm({form: 'dialogAddMessageForm'})(DialogsFormData)
+export const AddMessageFormRedux = reduxForm({form: 'dialogAddMessageForm'})(DialogsFormData)
 

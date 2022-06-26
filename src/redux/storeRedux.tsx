@@ -9,8 +9,7 @@ import {reducer as formReducer} from 'redux-form'
 import appReducer, {AppReducerActionsTypes} from "./appReducer";
 import {navBarPageReducer} from "./navBarPage-reducer";
 
-// объединяя reducer-ы с помощью combineReducers,
-// мы задаём структуру нашего единственного объекта-состояния
+
 const rootReducer = combineReducers({
     profileReducer,
     sidebarReducer,
@@ -21,9 +20,8 @@ const rootReducer = combineReducers({
     app: appReducer,
     navBarPage: navBarPageReducer,
 })
-// непосредственно создаём store
+
 export const store = createStore(rootReducer,applyMiddleware(thunk));
-// определить автоматически тип всего объекта состояния
 export type AppRootStateType = ReturnType<typeof rootReducer>
 //type of all Actions
 export type AppActionType = ProfileActionsTypes | UsersActionType | AuthActionsTypes | AppReducerActionsTypes
@@ -31,7 +29,6 @@ export type AppActionType = ProfileActionsTypes | UsersActionType | AuthActionsT
 // type all thunk
 export type AppThunkType<ReturnType=void> =ThunkAction <ReturnType,AppRootStateType,unknown,AppActionType>
 
-// а это, чтобы можно было в консоли браузера обращаться к store в любой момент
 // @ts-ignore
 window.store = store;
 

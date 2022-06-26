@@ -31,7 +31,7 @@ export const Profile = (props: MyPostsPropsType) => {
                          isOwner={props.isOwner}
                          saveProfile={props.saveProfile}
             />
-            <MyPostsContainer post={props.post}/>
+            <MyPostsContainer post={props.post} profile={props.profile}/>
         </div>
     )
 }

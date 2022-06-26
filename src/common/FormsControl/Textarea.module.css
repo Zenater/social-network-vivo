@@ -1,9 +1,9 @@
 
-/*.formControl*/ .error input,
-/*.formControl*/ .error textarea {
+ .error input,
+.error textarea {
     border: 2px solid red;
 }
-/*.formControl*/ .error span{
+.error span{
     color: red
 }
 .textarea {
@@ -15,7 +15,6 @@
     background: transparent;
     font-size: 14px;
     color: #a09e9e;
-    /*resize: none;*/
     outline: none;
     border-radius: 5px;
     overflow-y: auto;
